@@ -1,0 +1,87 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "inventorylookup"
+  title: "InventoryLookup"
+  version: "1.0.0"
+  description: "RealTime Inventory call from SFCC to OMS"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/xml"
+produces:
+- "application/xml"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "$(OMS_Url)"
+        verb: "POST"
+        cache-response: "protocol"
+        cache-ttl: 900
+        timeout: 10
+        username: "$(OMS_Username)"
+        tls-profile: "dev-oms"
+        password: "QA_User"
+  phase: "realized"
+  properties:
+    OMS_Password:
+      value: ""
+      description: "Password for OMS service used for Basic Authentication"
+      encoded: false
+    OMS_Username:
+      value: ""
+      description: "Username for OMS service used for Basic Authentication"
+      encoded: false
+    OMS_Url:
+      value: ""
+      description: ""
+      encoded: false
+  catalogs:
+    Sandbox:
+      properties:
+        OMS_Url: "https://dev-oms.tapestry.com:444/smcfs/restapi/executeFlow/TPR_CheckInventory"
+        OMS_Username: "omsdev3"
+        OMS_Password: "omsdev3"
+    QA:
+      properties:
+        OMS_Url: "https://qa2-oms.tapestry.com:444/smcfs/restapi/executeFlow/TPR_CheckInventory"
+        OMS_Username: "QA_User"
+        OMS_Password: "QA_User"
+    QA2:
+      properties:
+        OMS_Url: "https://preprod-oms.tapestry.com:444/smcfs/restapi/executeFlow/TPR_CheckInventory"
+        OMS_Username: "PreProd_User"
+        OMS_Password: "password"
+    PROD:
+      properties:
+        OMS_Password: "Tapestry@123"
+        OMS_Username: "OMS_MW_USER"
+        OMS_Url: "https://prod-oms.tapestry.com:444/smcfs/restapi/executeFlow/TPR_SFCC_GetInventory"
+paths:
+  /Inventorylookup:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []

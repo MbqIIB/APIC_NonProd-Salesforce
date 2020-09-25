@@ -1,0 +1,305 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "productservice"
+  title: "ProductService"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+consumes:
+- "application/xml"
+produces:
+- "application/xml"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - switch:
+        title: "switch"
+        case:
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"http://api.shopvisible.com/GetProductInventoryAroundLocation\"\
+            '&& apim.getvariable('request.body.ClientName')==\"\""
+          execute:
+          - xslt:
+              title: "xslt"
+              input: true
+              version: "1.0.0"
+              source: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet\
+                \ version=\"1.0\"\r\n  xmlns:b=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                \r\n  xmlns:c=\"http://api.shopvisible.com/\"\r\n  xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\
+                \r\n  xmlns:dp=\"http://www.datapower.com/extensions\"\r\n  xmlns:func=\"\
+                http://exslt.org/functions\"\r\n  xmlns:apim=\"http://www.ibm.com/apimanagement\"\
+                \ extension-element-prefixes=\"dp func apim\">\r\n\r\n  <!-- Contains\
+                \ the APIM functions -->\r\n  <xsl:import href=\"local:///isp/policy/apim.custom.xsl\"\
+                \ />\r\n\r\n  <xsl:template match=\"/\">\r\n    <xsl:variable name=\"\
+                input\" select=\"apim:payloadRead()\" />\r\n    \r\n  <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'ClientName'\" />\r\n    <xsl:with-param name=\"value\"\
+                \ select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:ClientName\"\
+                \ />\r\n    </xsl:call-template>\r\n   \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'Guid'\" />\r\n    <xsl:with-param name=\"value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:Guid\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'AffiliateExternalID'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:AffiliateExternalID\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'SearchRadias'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SearchRadias\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n  <xsl:with-param name=\"varName\" select=\"\
+                'SourcePostalCode'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SourcePostalCode\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'SourceCountry'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SourceCountry\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n      <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'PartnoOrOptionValueAndQty'\" />\r\n    <xsl:with-param\
+                \ name=\"value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:PartnoOrOptionValueAndQty\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n   \r\n    <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'ProcessingOptions'\" />\r\n    <xsl:with-param name=\"\
+                value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:ProcessingOptions\"\
+                \ />\r\n    </xsl:call-template>\r\n\r\n\r\n    \r\n  </xsl:template>\r\
+                \n</xsl:stylesheet>"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "GET"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "https://maps.googleapis.com/maps/api/geocode/xml?address=$(SourcePostalCode)&key=AIzaSyDH7OlEYGm8DCaxLGT2C8JSXeUdtVo9b7Q"
+          - xslt:
+              title: "xslt"
+              input: false
+              version: "1.0.0"
+              source: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet\
+                \ version=\"1.0\"\r\n  xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\
+                \r\n  xmlns:dp=\"http://www.datapower.com/extensions\"\r\n  xmlns:func=\"\
+                http://exslt.org/functions\"\r\n  xmlns:apim=\"http://www.ibm.com/apimanagement\"\
+                \ extension-element-prefixes=\"dp func apim\">\r\n\r\n  <!-- Contains\
+                \ the APIM functions -->\r\n  <xsl:import href=\"local:///isp/policy/apim.custom.xsl\"\
+                \ />\r\n\r\n  <xsl:template match=\"/\">\r\n    <xsl:variable name=\"\
+                input\" select=\"apim:payloadRead()\" />\r\n\r\n  <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n  <xsl:with-param name=\"varName\"\
+                \ select=\"'lat'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/GeocodeResponse/result/geometry/location/lat\" />\r\n   </xsl:call-template>\r\
+                \n   <xsl:call-template name=\"apim:setVariable\">\r\n  <xsl:with-param\
+                \ name=\"varName\" select=\"'lng'\" />\r\n    <xsl:with-param name=\"\
+                value\" select=\"$input/GeocodeResponse/result/geometry/location/lng\"\
+                \ />\r\n    </xsl:call-template>\r\n  </xsl:template>\r\n </xsl:stylesheet>"
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "var transform = require('transform');\r\n\r\nvar ClientName\
+                \ = apim.getvariable('ClientName');\r\nvar Guid = apim.getvariable('Guid');\r\
+                \nvar AffiliateExternalID = apim.getvariable('AffiliateExternalID');\r\
+                \nvar SearchRadias = apim.getvariable('SearchRadias');\r\nvar SourcePostalCode\
+                \ = apim.getvariable('SourcePostalCode');\r\nvar SourceCountry = apim.getvariable('SourceCountry');\r\
+                \nvar PartnoOrOptionValueAndQty = apim.getvariable('PartnoOrOptionValueAndQty');\r\
+                \nvar ProcessingOptions = apim.getvariable('ProcessingOptions');\r\
+                \nvar SOAPAction= apim.getvariable('request.headers.soapaction');\r\
+                \nvar lat = apim.getvariable('lat');\r\nvar lng = apim.getvariable('lng');\r\
+                \n//var test1 = XML.stringify( {omitXmlDeclaration: true}, input);\r\
+                \n\r\n\r\n//var test1 = XML.stringify( {omitXmlDeclaration: true},\
+                \ input);\r\n\r\nvar GeocodeResponse ='<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                ><s:Body xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"\
+                http://www.w3.org/2001/XMLSchema\"><GetProductInventoryAroundLocation\
+                \ xmlns=\"http://api.shopvisible.com/\"><ClientName>'+ClientName+'</ClientName><Guid>'+Guid+'</Guid><AffiliateExternalID>'+AffiliateExternalID+'</AffiliateExternalID><SearchRadias>'+SearchRadias+'</SearchRadias><SourcePostalCode>'+SourcePostalCode+'</SourcePostalCode><SourceCountry>'+SourceCountry+'</SourceCountry><PartnoOrOptionValueAndQty>'+PartnoOrOptionValueAndQty+'</PartnoOrOptionValueAndQty><ProcessingOptions>'+ProcessingOptions+'</ProcessingOptions><lat>'+lat+'</lat><lng>'+lng+'</lng></GetProductInventoryAroundLocation></s:Body></s:Envelope>';\r\
+                \n\t\t\r\n    session.output.write(GeocodeResponse);\r\n  //  apim.output('application/xml');\r\
+                \n\tapim.setvariable('message.headers.SOAPAction',SOAPAction);\r\n\
+                \t\r\napim.output('*/*');\r\n\r\n\r\n"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/ProductService"
+              cache-ttl: 0
+              secure-gateway: false
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"http://api.shopvisible.com/GetProductInventoryAroundLocation\"\
+            ' && apim.getvariable('request.body.ClientName')!=\"\""
+          execute:
+          - xslt:
+              title: "xslt"
+              input: false
+              version: "1.0.0"
+              source: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet\
+                \ version=\"1.0\"\r\n  xmlns:b=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                \r\n  xmlns:c=\"http://api.shopvisible.com/\"\r\n  xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\
+                \r\n  xmlns:dp=\"http://www.datapower.com/extensions\"\r\n  xmlns:func=\"\
+                http://exslt.org/functions\"\r\n  xmlns:apim=\"http://www.ibm.com/apimanagement\"\
+                \ extension-element-prefixes=\"dp func apim\">\r\n\r\n \r\n\r\n  <!--\
+                \ Contains the APIM functions -->\r\n  <xsl:import href=\"local:///isp/policy/apim.custom.xsl\"\
+                \ />\r\n\r\n  <xsl:template match=\"/\">\r\n    <xsl:variable name=\"\
+                input\" select=\"apim:payloadRead()\" />\r\n    <xsl:variable name=\"\
+                CName\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:ClientName\"\
+                />\r\n <xsl:variable name=\"Cty_Cd\" select=\"substring-after($CName,'_')\"\
+                />\r\n    \r\n  <xsl:call-template name=\"apim:setVariable\">\r\n\
+                \    <xsl:with-param name=\"varName\" select=\"'ClientName'\" />\r\
+                \n    <xsl:with-param name=\"value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:ClientName\"\
+                \ />\r\n    </xsl:call-template>\r\n   \r\n   <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'Region'\" />\r\n    <xsl:with-param name=\"value\" select=\"$Cty_Cd\"\
+                \ />\r\n  </xsl:call-template> \r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'Guid'\" />\r\n    <xsl:with-param name=\"value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:Guid\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'AffiliateExternalID'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:AffiliateExternalID\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'SearchRadias'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SearchRadias\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n  <xsl:with-param name=\"varName\" select=\"\
+                'SourcePostalCode'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SourcePostalCode\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'SourceCountry'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SourceCountry\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n      <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'PartnoOrOptionValueAndQty'\" />\r\n    <xsl:with-param\
+                \ name=\"value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:PartnoOrOptionValueAndQty\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n   \r\n    <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'ProcessingOptions'\" />\r\n    <xsl:with-param name=\"\
+                value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:ProcessingOptions\"\
+                \ />\r\n    </xsl:call-template>\r\n\r\n\r\n    \r\n  </xsl:template>\r\
+                \n</xsl:stylesheet>"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "GET"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "https://maps.googleapis.com/maps/api/geocode/xml?address=$(SourcePostalCode)&region=$(Region)&key=AIzaSyDH7OlEYGm8DCaxLGT2C8JSXeUdtVo9b7Q"
+          - xslt:
+              title: "xslt"
+              input: false
+              version: "1.0.0"
+              source: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet\
+                \ version=\"1.0\"\r\n  xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\
+                \r\n  xmlns:dp=\"http://www.datapower.com/extensions\"\r\n  xmlns:func=\"\
+                http://exslt.org/functions\"\r\n  xmlns:apim=\"http://www.ibm.com/apimanagement\"\
+                \ extension-element-prefixes=\"dp func apim\">\r\n\r\n  <!-- Contains\
+                \ the APIM functions -->\r\n  <xsl:import href=\"local:///isp/policy/apim.custom.xsl\"\
+                \ />\r\n\r\n  <xsl:template match=\"/\">\r\n    <xsl:variable name=\"\
+                input\" select=\"apim:payloadRead()\" />\r\n\r\n  <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n  <xsl:with-param name=\"varName\"\
+                \ select=\"'lat'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/GeocodeResponse/result/geometry/location/lat\" />\r\n   </xsl:call-template>\r\
+                \n   <xsl:call-template name=\"apim:setVariable\">\r\n  <xsl:with-param\
+                \ name=\"varName\" select=\"'lng'\" />\r\n    <xsl:with-param name=\"\
+                value\" select=\"$input/GeocodeResponse/result/geometry/location/lng\"\
+                \ />\r\n    </xsl:call-template>\r\n  </xsl:template>\r\n </xsl:stylesheet>"
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "var transform = require('transform');\r\n\r\nvar ClientName\
+                \ = apim.getvariable('ClientName');\r\nvar Guid = apim.getvariable('Guid');\r\
+                \nvar AffiliateExternalID = apim.getvariable('AffiliateExternalID');\r\
+                \nvar SearchRadias = apim.getvariable('SearchRadias');\r\nvar SourcePostalCode\
+                \ = apim.getvariable('SourcePostalCode');\r\nvar SourceCountry = apim.getvariable('SourceCountry');\r\
+                \nvar PartnoOrOptionValueAndQty = apim.getvariable('PartnoOrOptionValueAndQty');\r\
+                \nvar ProcessingOptions = apim.getvariable('ProcessingOptions');\r\
+                \nvar SOAPAction= apim.getvariable('request.headers.soapaction');\r\
+                \nvar lat = apim.getvariable('lat');\r\nvar lng = apim.getvariable('lng');\r\
+                \n//var test1 = XML.stringify( {omitXmlDeclaration: true}, input);\r\
+                \n\r\n\r\n//var test1 = XML.stringify( {omitXmlDeclaration: true},\
+                \ input);\r\n\r\nvar GeocodeResponse ='<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                ><s:Body xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"\
+                http://www.w3.org/2001/XMLSchema\"><GetProductInventoryAroundLocation\
+                \ xmlns=\"http://api.shopvisible.com/\"><ClientName>'+ClientName+'</ClientName><Guid>'+Guid+'</Guid><AffiliateExternalID>'+AffiliateExternalID+'</AffiliateExternalID><SearchRadias>'+SearchRadias+'</SearchRadias><SourcePostalCode>'+SourcePostalCode+'</SourcePostalCode><SourceCountry>'+SourceCountry+'</SourceCountry><PartnoOrOptionValueAndQty>'+PartnoOrOptionValueAndQty+'</PartnoOrOptionValueAndQty><ProcessingOptions>'+ProcessingOptions+'</ProcessingOptions><lat>'+lat+'</lat><lng>'+lng+'</lng></GetProductInventoryAroundLocation></s:Body></s:Envelope>';\r\
+                \n\t\t\r\n    session.output.write(GeocodeResponse);\r\n  //  apim.output('application/xml');\r\
+                \n\tapim.setvariable('message.headers.SOAPAction',SOAPAction);\r\n\
+                \t\r\napim.output('*/*');\r\n\r\n\r\n"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/ProductService"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"http://api.shopvisible.com/GetInventoryByProductPartNoOrOptionValue\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/ProductService"
+              cache-ttl: 0
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"http://api.shopvisible.com/UpdateSupplierExternalReserveQuantity\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/ProductService"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"http://api.shopvisible.com/SetProductSupplierInventoryBasic\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/ProductService"
+              cache-ttl: 0
+        version: "1.0.0"
+  phase: "realized"
+  gateway: "datapower-gateway"
+paths:
+  /ProductService:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+tags: []
+basePath: "/"

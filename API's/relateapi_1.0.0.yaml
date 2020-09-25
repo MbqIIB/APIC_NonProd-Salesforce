@@ -1,0 +1,230 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "relateapi"
+  title: "RelateAPI"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/xml"
+produces:
+- "application/xml"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - switch:
+        title: "switch"
+        case:
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"addOrUpdateCustomer\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/relatecrm/addOrUpdateCustomer"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"retrieveCustomer\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/relatecrm/retrieveCustomer"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"associateCardToCustomer\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/relatecrm/associateCardToCustomer"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"getCardInquiryData\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/relatecrm/getCardInquiryData"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"getCustomerCardsInquiryData\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/relatecrm/getCustomerCardsInquiryData"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"activateInstrument\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/relatecrm/activateInstrument"
+        - condition: "apim.getvariable('request.headers.soapaction')=='\"deactivateInstrument\"\
+            '"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/relatecrm/deactivateInstrument"
+        - otherwise:
+          - throw:
+              title: "throw"
+              version: "1.0.0"
+              message: "Invalid SOAPAction Header value"
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /relatecrm/addOrUpdateCustomer:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+  /relatecrm/retrieveCustomer:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+  /relatecrm/associateCardToCustomer:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+  /relatecrm/getCardInquiryData:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+  /relatecrm/getCustomerCardsInquiryData:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+  /relatecrm/activateInstrument:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+  /relatecrm/deactivateInstrument:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      - name: "SoapAction"
+        type: "string"
+        required: true
+        in: "header"
+definitions: {}
+tags: []

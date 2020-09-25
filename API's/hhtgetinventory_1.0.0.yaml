@@ -1,0 +1,51 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "hhtgetinventory"
+  title: "HHTGetInventory"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/HHT/GetInventory"
+        verb: "POST"
+        cache-ttl: 900
+        cache-response: "protocol"
+        timeout: 60
+        stop-on-error: []
+        title: "Invoke"
+  phase: "realized"
+paths:
+  /HHT/GetInventory:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []

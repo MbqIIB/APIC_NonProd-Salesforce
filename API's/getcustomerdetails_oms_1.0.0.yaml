@@ -1,0 +1,58 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getcustomerdetails_oms"
+  title: "Getcustomerdetails_oms"
+  version: "1.0.0"
+  description: "To connect Customer 360 API services from OMS"
+  contact:
+    name: "Sujai Priyan"
+    email: "sjaganathan@coach.com"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/OMS_Customer360"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/OMS_Customer360/Getcustomerdetails_oms"
+        title: "Invoke"
+        cache-response: "no-cache"
+        verb: "POST"
+        cache-ttl: 900
+        timeout: 60
+  phase: "realized"
+paths:
+  /Getcustomerdetails_oms:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "BODY"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      consumes:
+      - "application/xml"
+      produces:
+      - "application/xml"
+definitions: {}
+tags: []

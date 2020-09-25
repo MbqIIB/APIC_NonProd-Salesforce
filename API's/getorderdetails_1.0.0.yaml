@@ -1,0 +1,100 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getorderdetails"
+  title: "GetOrderDetails"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/orders/v1"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - set-variable:
+        title: "set-variable"
+        actions:
+        - set: "message.body"
+          value: "{\"status\": {\"code\": \"0\",\"description\": \"successful/failure\
+            \ message\"},\"orders\": [{\"orderHeader\": {\"orderNumber\": \"V24777900000\"\
+            ,\"orderDate\": \"08/02/2013\",\"orderTotal\": \"275.43\",\"orderPhoneNumber\"\
+            : \"4126163xxx\",\"orderEmailAddress\": \"xxxxx@tapestry.com\",\"buyName\"\
+            : \"Test Username\",\"buyStreet\": \"City of Maryland Heights\",\"buyAddl\"\
+            : \"\",\"buyCity\": \"Maryland Heights\",\"buyState\": \"MO\",\"buyZip\"\
+            : \"63043\"},\"orderDetail\": {\"products\": [{\"productname\": \"LEATHER\
+            \ DUFFLE\",\"style\": \"F15064\",\"color\": \"SV/MH\",\"size\": \"\",\"\
+            skuPrice\": \"95.00\",\"skuQty\": \"2\",\"status\": \"shipped\",\"shipping\"\
+            : {\"shipName\": \"Test User\",\"shipStreet\": \"City of Maryland Heights\"\
+            ,\"shipAddl\": \"\",\"shipCity\": \"Maryland Heights\",\"shipState\":\
+            \ \"MO\",\"shipZip\": \"63043\",\"shipTelephone\": \"4126163xxx\",\"shipMethod\"\
+            : \"UPS\",\"shipDate\": \"10/01/2020\",\"trackingNumber\": \"Z123456789\"\
+            }},{\"productname\": \"ASH OP ART SCF MD WR\",\"style\": \"F49422\",\"\
+            color\": \"SV/MC\",\"size\": \"\",\"skuPrice\": \"44.00\",\"skuQty\":\
+            \ \"1\",\"status\": \"processing\",\"shipping\": {\"shipName\": \"Test\
+            \ User 2\",\"shipStreet\": \"Hudson Yards\",\"shipAddl\": \"\",\"shipCity\"\
+            : \"New York\",\"shipState\": \"NY\",\"shipZip\": \"10001\",\"shipTelephone\"\
+            : \"4126163xxx\",\"shipMethod\": \"UPS\",\"shipDate\": \"\",\"trackingNumber\"\
+            : \"\"}}]}}]}"
+        - set: "message.status.code"
+          value: "200 OK"
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /getOrderDetails:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions:
+  Status:
+    properties:
+      code:
+        type: "string"
+        example: "0"
+      description:
+        type: "string"
+        example: "successful"
+    additionalProperties: false
+  GetOrderDetailsResponse:
+    properties:
+      status:
+        $ref: "#/definitions/Status"
+    additionalProperties: false
+  Product:
+    properties:
+      productname:
+        type: "string"
+      new-property-2:
+        type: "string"
+      new-property-3:
+        type: "string"
+      new-property-4:
+        type: "string"
+      new-property-5:
+        type: "string"
+      new-property-6:
+        type: "string"
+    additionalProperties: false
+tags: []
+responses: {}

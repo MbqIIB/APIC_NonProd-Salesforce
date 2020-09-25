@@ -1,0 +1,231 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "orderservice"
+  title: "OrderService"
+  version: "2.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+consumes:
+- "application/xml"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - operation-switch:
+        title: ""
+        case:
+        - operations:
+          - verb: "post"
+            path: "/OrderService/getOrdersByStatus"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/getOrderByStatus"
+              cache-ttl: 60
+        - operations:
+          - verb: "post"
+            path: "/OrderService"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "time-to-live"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService"
+        - operations:
+          - verb: "post"
+            path: "/OrderService/InsertOrderRefunded"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "time-to-live"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/InsertOrderRefunded"
+              description: ""
+        - operations:
+          - verb: "post"
+            path: "/OrderService/UpdateOrderNoStockReason"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "time-to-live"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              description: "OrderAction"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/NoStockReasoning"
+        - operations:
+          - verb: "get"
+            path: "/OrderService/GetNoStockReasonCodes"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "GET"
+              cache-response: "time-to-live"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/NoStockReasonCode"
+              description: ""
+        - operations:
+          - verb: "post"
+            path: "/OrderService/GetOrderActions"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "time-to-live"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/OrderAction"
+              description: ""
+        - operations:
+          - verb: "post"
+            path: "/OrderService/GetOrderLineItems"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/OrderDetailOrderLineItems"
+        - operations:
+          - verb: "post"
+            path: "/OrderService/GetOrderPayments"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "time-to-live"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/OrderDetailPayment"
+        - operations:
+          - verb: "post"
+            path: "/OrderService/GetOrderHeader"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "time-to-live"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/OrderDetailOrderHeader"
+        - operations:
+          - verb: "post"
+            path: "/OrderService/UpdateOrderStatus"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/OrderService/UpdateOrderStatus"
+        otherwise: []
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /OrderService/UpdateOrderStatus:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/InsertOrderRefunded:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/InventoryFileGeneration:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/OrderStatusUpdate:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/UpdateOrderNoStockReason:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/GetNoStockReasonCodes:
+    get:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/GetOrderActions:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/GetOrderLineItems:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/GetOrderPayments:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/GetOrderHeader:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService/getOrdersByStatus:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+  /OrderService:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+definitions: {}
+tags: []
+produces:
+- "application/xml"
+basePath: "/"

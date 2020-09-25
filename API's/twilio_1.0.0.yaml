@@ -1,0 +1,82 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "twilio"
+  title: "Twilio"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/communications/messages"
+consumes:
+- "application/x-www-form-urlencoded"
+produces:
+- "application/x-www-form-urlencoded"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - set-variable:
+        title: "set-variable"
+        actions:
+        - set: "message.headers.authorization"
+          value: "Basic U0sxZGU4MDg2YTZmMTg4MzJkMWRkNzI2ODdkZWI5ZDViZjp1RkZTTnNyY2FHS3lMeGZ2OEJjNWM2ZlRtc29EeGQxVw=="
+        version: "1.0.0"
+    - gatewayscript:
+        title: "gatewayscript"
+        version: "1.0.0"
+        source: "var client = apim.getvariable('request.headers.client_name');\n//var\
+          \ from = apim.getvariable('message.body.from');\n//var to = apim.getvariable('message.body.to');\n\
+          //var body = apim.getvariable('message.body.body');\n\n//apim.setvariable('resp_client_ip',client_ip);\n\
+          apim.setvariable('resp_client',client);\n\n//var twilio= 'From='+from+'&To='+to+'&Body='+body;\n\
+          //var str = 'application/x-www-form-urlencoded';\n\n//apim.setvariable('message.body',\
+          \ twilio);\n//apim.setvariable('message.headers.content-type', str);\n//session.output.write(twilio);\n"
+    - invoke:
+        title: "invoke"
+        timeout: 60
+        verb: "POST"
+        cache-response: "no-cache"
+        cache-ttl: 900
+        stop-on-error:
+        - null
+        version: "1.0.0"
+        target-url: "https://api.twilio.com/2010-04-01/Accounts/AC9a30c8a46c57adbfc9cc4d310de188d8/Messages.json"
+    - gatewayscript:
+        title: "gatewayscript"
+        version: "1.0.0"
+        source: "var to = apim.getvariable('message.body.to');\r\nvar from = apim.getvariable('message.body.from');\r\
+          \nvar body = apim.getvariable('message.body.body');\r\nvar status = apim.getvariable('message.body.status');\r\
+          \n//var client_ip = apim.getvariable('resp_client_ip');\r\nvar client =\
+          \ apim.getvariable('resp_client');\r\n\r\nvar jsonResp = '{\\\\n' +\r\n\
+          '\"status\": \"'+ status +\r\n'\",\\\\n \"to\": \"'+to+ \r\n'\",\\\\n \"\
+          from\": \"'+from +\r\n'\",\\\\n \"body\": \"'+body+\r\n'\",\\\\n \"client_name\"\
+          : \"' + client+\r\n'\"\\\\n}';\r\n\r\nsession.output.write(jsonResp);\r\n\
+          apim.output('application/json');"
+  phase: "realized"
+paths:
+  /SendSMS:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "client_name"
+        type: "string"
+        required: true
+        in: "header"
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+tags: []

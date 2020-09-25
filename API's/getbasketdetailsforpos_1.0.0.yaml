@@ -1,0 +1,95 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getbasketdetailsforpos"
+  title: "GetBasketDetailsForPOS"
+  version: "1.0.0"
+  contact:
+    name: "Sathya"
+    email: "slakshmanan@coach.com"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - map:
+        title: "map"
+        inputs:
+          ReferenceNumber:
+            schema:
+              type: "string"
+            variable: "request.parameters.ReferenceNumber"
+        outputs:
+          output:
+            schema:
+              description: ""
+              type: "object"
+              properties:
+                Baskets:
+                  type: "array"
+                  items:
+                    properties:
+                      ReferenceNumber:
+                        type: "string"
+                        name: "ReferenceNumber"
+                    type: "object"
+                  name: "Baskets"
+              example: "{\r\n  \"Baskets\": \r\n [\r\n    {\r\n     \"ReferenceNumber\"\
+                : \"C3055\"\r\n    }\r\n  ]\r\n}"
+            variable: "message.body"
+            content: "application/json"
+        actions:
+        - create: "output.Baskets"
+          foreach: "ReferenceNumber"
+          from: "ReferenceNumber"
+          actions:
+          - set: "ReferenceNumber"
+            from: "$item"
+        version: "1.0.0"
+    - invoke:
+        title: "invoke"
+        timeout: 60
+        verb: "POST"
+        cache-response: "no-cache"
+        cache-ttl: 900
+        stop-on-error: []
+        version: "1.0.0"
+        target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/Basket"
+  phase: "realized"
+paths:
+  /Basket:
+    get:
+      responses:
+        200:
+          description: "200 OK"
+          schema:
+            type: "object"
+      parameters:
+      - name: "ReferenceNumber"
+        required: true
+        in: "query"
+        type: "string"
+tags: []
+parameters:
+  ReferenceNumber:
+    name: "ReferenceNumber"
+    required: true
+    in: "query"
+    type: "string"

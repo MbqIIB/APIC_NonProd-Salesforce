@@ -1,0 +1,79 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "inventoryreservation"
+  title: "InventoryReservation"
+  version: "1.0.0"
+  description: "RealTime Inventory call from SFCC to OMS"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/xml"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        title: "invoke"
+        verb: "POST"
+        cache-response: "protocol"
+        cache-ttl: 900
+        stop-on-error: []
+        version: "1.0.0"
+        target-url: "$(APIC_Url)"
+        timeout: 2
+    - set-variable:
+        title: "set-variable"
+        actions:
+        - set: "message.body"
+          value: "<Response><Status>200 OK</Status></Response>"
+        - set: "message.status.code"
+          value: "200 OK"
+        version: "1.0.0"
+  phase: "realized"
+  properties:
+    APIC_Url:
+      value: ""
+      description: ""
+      encoded: false
+  catalogs:
+    Sandbox:
+      properties:
+        APIC_Url: "https://api-tapestry.apiconnect.ibmcloud.com/coachinc-api/sb/Inventoryreservationretry?client_id=8c16cbaa-74e9-437b-9b4c-8848a84f0991"
+    QA:
+      properties:
+        APIC_Url: "https://api-tapestry.apiconnect.ibmcloud.com/coachinc-api/qa/Inventoryreservationretry?client_id=bd7dab34-8178-44df-9839-5f8c12fb1f45"
+    QA2:
+      properties:
+        APIC_Url: "https://api-tapestry.apiconnect.ibmcloud.com/coachinc-api/qa2/Inventoryreservationretry?client_id=e0ebf3d6-b428-430c-bbd4-32591a7df61f"
+    PROD:
+      properties:
+        APIC_Url: "https://api-tapestry.apiconnect.ibmcloud.com/coachinc-api/prod/Inventoryreservationretry?client_id=4937e24d-cbc1-40ad-ba9a-ce71f8d6908e"
+paths:
+  /Inventoryreservation:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []
+produces:
+- "application/xml"

@@ -1,0 +1,73 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "inventoryreservationretrypoc"
+  title: "InventoryReservation_RetryPOC"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/xml"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - retryinvoke:
+        timeout: 60
+        verb: "GET"
+        compression: false
+        cache-response: "protocol"
+        cache-ttl: 900
+        retry-attempts: 3
+        retry-interval: 1000
+        version: "1.0.0"
+        target-url: ""
+        tls-profile: ""
+        username: ""
+        password: ""
+        cache-key: ""
+        output: ""
+    - if:
+        title: "if"
+        condition: "if (message.status.code) != '200 OK';"
+        execute: []
+        version: "1.0.0"
+    - invoke:
+        title: "invoke"
+        verb: "POST"
+        cache-response: "protocol"
+        cache-ttl: 900
+        stop-on-error:
+        - null
+        version: "1.0.0"
+        target-url: "http://cap-sg-prd-2.securegateway.appdomain.cloud:18686/EmailAlert"
+        timeout: 10
+  phase: "realized"
+paths:
+  /Inventoryreserve_POCRetry:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []
+produces:
+- "application/xml"

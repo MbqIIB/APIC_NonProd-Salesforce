@@ -1,0 +1,53 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getoutletinvitationstatus"
+  title: "GetOutletInvitationStatus"
+  version: "1.0.0"
+  contact:
+    name: "Sathya"
+    email: "slakshmanan@coach.com"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - set-variable:
+        title: "set-variable"
+        actions:
+        - set: "message.body"
+          value: "{ \"Status\":\"Success\", \"Description\":\"Customer Invitation\
+            \ Details follows\", \"Customer\":[ { \"Email\":\"example@example.com\"\
+            \ } ] }"
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /GetOutletInvitationStatus:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+tags: []

@@ -1,0 +1,64 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "customerlookup2"
+  title: "CustomerLookup2"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/Customer"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "$(endPointURL)"
+        verb: "keep"
+        timeout: 60
+        cache-response: "no-cache"
+        stop-on-error: []
+  phase: "realized"
+  properties:
+    endPointURL:
+      value: "http://cap-sg-prd-2.securegateway.appdomain.cloud:18686/CustomerLookup"
+      description: ""
+      encoded: false
+  catalogs:
+    Sandbox:
+      properties:
+        endPointURL: "http://cap-sg-prd-2.securegateway.appdomain.cloud:18686/CustomerLookup"
+    QA2:
+      properties:
+        endPointURL: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/CustomerLookup"
+    QA:
+      properties:
+        endPointURL: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18598/CustomerLookup"
+paths:
+  /CustomerLookup2:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []

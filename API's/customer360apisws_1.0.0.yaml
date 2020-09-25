@@ -1,0 +1,140 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "customer360apisws"
+  title: "Customer360APIs_WS"
+  version: "1.0.0"
+  description: "Customer360"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/WS/Customer"
+consumes:
+- "application/json"
+- "charset=UTF-8"
+produces:
+- "application/json"
+- "charset=UTF-8"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - operation-switch:
+        title: "operation-switch"
+        case:
+        - operations:
+          - verb: "post"
+            path: "/GetCustomerDetails"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/WS/Customer/GetCustomerDetails"
+        - operations:
+          - verb: "post"
+            path: "/CustomerLookup"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/WS/Customer/CustomerLookup"
+        - operations:
+          - verb: "post"
+            path: "/CreateCustomer"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/WS/Customer/CreateCustomer"
+        - operations:
+          - verb: "post"
+            path: "/UpdateCustomer"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/WS/Customer/UpdateCustomer"
+        otherwise: []
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /GetCustomerDetails:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+  /CustomerLookup:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+  /CreateCustomer:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+  /UpdateCustomer:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []

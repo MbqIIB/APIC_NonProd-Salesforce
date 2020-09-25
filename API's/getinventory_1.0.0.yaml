@@ -1,0 +1,113 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getinventory"
+  title: "GetInventory"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/Product"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - gatewayscript:
+        title: "gatewayscript"
+        version: "1.0.0"
+        source: "var input = apim.getvariable('message.body');\r\n\r\nvar postalcode\
+          \ = input.GetInventoryRequest[0].SearchPostalCode;\r\n\r\nvar ClientZone\
+          \ = apim.getvariable('request.parameters.ClientZone')  ;\r\n\r\napim.setvariable(\"\
+          json\",input);\r\napim.setvariable(\"SourcePostalCode\",postalcode);\r\n\
+          \r\n\r\napim.setvariable('message.headers.ClientZone',ClientZone);\r\n\r\
+          \n\r\n"
+    - switch:
+        title: "switch"
+        case:
+        - condition: "apim.getvariable('json').GetInventoryRequest[0].hasOwnProperty('SearchPostalCode')\
+            \ && apim.getvariable('SourcePostalCode').trim()!=\"\""
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "GET"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "https://maps.googleapis.com/maps/api/geocode/json?address=$(SourcePostalCode)&key=AIzaSyDH7OlEYGm8DCaxLGT2C8JSXeUdtVo9b7Q"
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "var googleRsp = apim.getvariable('message.body');\r\n\r\nvar\
+                \ lat = googleRsp.results[0].geometry.location.lat;\r\nvar lng = googleRsp.results[0].geometry.location.lng;\r\
+                \n\r\napim.setvariable(\"lat\",lat);\r\napim.setvariable(\"lng\",lng);"
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "apim.readInputAsJSON(function (error, json) {\r\n    \r\nvar\
+                \ json  = apim.getvariable('json');\r\n\r\nvar lat = apim.getvariable('lat');\r\
+                \nvar lng = apim.getvariable('lng');\r\n\r\nvar ClientZone = apim.getvariable('request.parameters.ClientZone')\
+                \  ;\r\n\r\njson.GetInventoryRequest[0].lat = lat;\r\njson.GetInventoryRequest[0].lng\
+                \ = lng;\r\n\r\nsession.output.write(json); \r\n\r\napim.setvariable('message.headers.ClientZone',ClientZone);\r\
+                \n\r\napim.output('*/*');\r\n});"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/Product/GetInventory"
+        - otherwise:
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "apim.readInputAsJSON(function (error, json) {\r\n    \r\nvar\
+                \ json  = apim.getvariable('json');\r\nvar ClientZone = apim.getvariable('request.parameters.ClientZone')\
+                \  ;\r\napim.setvariable('message.headers.ClientZone',ClientZone);\r\
+                \nsession.output.write(json); \r\napim.output('*/*');\r\n});"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error: []
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/Product/GetInventory"
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /GetInventory:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+definitions: {}
+tags: []

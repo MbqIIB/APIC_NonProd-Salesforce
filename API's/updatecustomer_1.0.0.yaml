@@ -1,0 +1,206 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "updatecustomer"
+  title: "UpdateCustomer"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/Customer"
+consumes:
+- "application/json"
+- "charset=UTF-8"
+produces:
+- "application/json"
+- "charset=UTF-8"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        title: "invoke"
+        timeout: 10
+        verb: "POST"
+        cache-response: "protocol"
+        stop-on-error: []
+        version: "1.0.0"
+        target-url: "http://cap-sg-prd-1.integration.ibmcloud.com:16838/Customer/UpdateCustomer"
+        cache-ttl: 900
+  phase: "realized"
+  properties:
+    APIC_SG_DP_URL:
+      value: ""
+      description: ""
+      encoded: false
+  catalogs:
+    PROD:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/Customer/UpdateCustomer"
+    QA:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18598/Customer/UpdateCustomer"
+    Sandbox:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-2.securegateway.appdomain.cloud:18686/Customer/UpdateCustomer"
+    QA2:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/Customer/UpdateCustomer"
+paths:
+  /UpdateCustomer:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+    parameters:
+    - name: "Body"
+      required: true
+      in: "body"
+      schema:
+        $ref: "#/definitions/UpdateCustomerRequest"
+definitions:
+  UpdateCustomerRequest:
+    description: ""
+    type: "object"
+    properties:
+      Description:
+        type: "string"
+      CustomerDetails:
+        type: "array"
+        items:
+          properties:
+            Brand:
+              type: "string"
+            Source:
+              type: "string"
+            CustomerId:
+              type: "number"
+            LastName:
+              type: "string"
+            FirstName:
+              type: "string"
+            MiddleName:
+              type: "string"
+            Address:
+              type: "array"
+              items:
+                properties:
+                  Type:
+                    type: "string"
+                  Address1:
+                    type: "string"
+                  Address2:
+                    type: "string"
+                  City:
+                    type: "string"
+                  State:
+                    type: "string"
+                  Zip:
+                    type: "string"
+                  Country:
+                    type: "string"
+                type: "object"
+            Phone:
+              type: "array"
+              items:
+                properties:
+                  Type:
+                    type: "string"
+                  Number:
+                    type: "string"
+                  OptIn:
+                    type: "string"
+                  Preferred:
+                    type: "string"
+                  SMSOptIn:
+                    type: "string"
+                type: "object"
+            Email:
+              type: "array"
+              items:
+                properties:
+                  Type:
+                    type: "string"
+                  Email:
+                    type: "string"
+                type: "object"
+            Preferences:
+              type: "object"
+              properties:
+                ReceiveMail:
+                  type: "string"
+                ReceiveEmail:
+                  type: "string"
+                ReceiveStoreEmail:
+                  type: "string"
+                PreferredContactMethod:
+                  type: "string"
+          type: "object"
+    example:
+      Description: "Update Customer API"
+      CustomerDetails:
+      - Brand: "COACH"
+        Source: "POS"
+        CustomerId: 100019876
+        LastName: "BILLA"
+        FirstName: "Suryaprakash"
+        MiddleName: "Reddy"
+        Address:
+        - Type: "Billing"
+          Address1: "3GlockFarmWay"
+          Address2: ""
+          City: "Chesterfield"
+          State: "NJ"
+          Zip: "08515"
+          Country: "US"
+        - Type: "Shipping"
+          Address1: "3GlockFarmWay"
+          Address2: ""
+          City: "Chesterfield"
+          State: "NJ"
+          Zip: "08515"
+          Country: "US"
+        - Type: "Office"
+          Address1: "10HudsonYards"
+          Address2: ""
+          City: "NewYork"
+          State: "NY"
+          Zip: "10001"
+          Country: "US"
+        Phone:
+        - Type: "Home"
+          Number: "609-379-6112"
+          OptIn: "N"
+          Preferred: "N"
+          SMSOptIn: "N"
+        - Type: "Cell"
+          Number: "646-457-2741"
+          OptIn: "Y"
+          Preferred: "Y"
+          SMSOptIn: "N"
+        - Type: "Work"
+          Number: "212-868-8315"
+          OptIn: "N"
+          Preferred: "N"
+          SMSOptIn: "N"
+        Email:
+        - Type: "Personal"
+          Email: "suryabilla@yahoo.com"
+        - Type: "Work"
+          Email: "pbilla@coach.com"
+        Preferences:
+          ReceiveMail: "N"
+          ReceiveEmail: "N"
+          ReceiveStoreEmail: "N"
+          PreferredContactMethod: "Email"
+tags: []

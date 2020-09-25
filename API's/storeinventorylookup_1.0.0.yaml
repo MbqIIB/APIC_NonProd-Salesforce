@@ -1,0 +1,52 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "storeinventorylookup"
+  title: "StoreInventoryLookup"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        title: "invoke"
+        timeout: 120
+        verb: "POST"
+        cache-response: "protocol"
+        cache-ttl: 900
+        stop-on-error: []
+        version: "1.0.0"
+        target-url: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/Inventory/StoreInventoryLookup"
+  phase: "realized"
+paths:
+  /Inventory/StoreInventoryLookup:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []

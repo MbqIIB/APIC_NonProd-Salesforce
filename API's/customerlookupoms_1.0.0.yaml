@@ -1,0 +1,54 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "customerlookupoms"
+  title: "Customerlookup_oms"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/OMS_Customer360"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/OMS_Customer360/Customerlookup_oms"
+        title: "invoke"
+        timeout: 60
+        verb: "POST"
+        cache-response: "no-cache"
+        cache-ttl: 900
+  phase: "realized"
+paths:
+  /Customerlookup_oms:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      produces:
+      - "application/xml"
+      consumes:
+      - "application/xml"
+definitions: {}
+tags: []

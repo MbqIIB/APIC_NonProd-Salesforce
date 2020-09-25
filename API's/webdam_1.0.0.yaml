@@ -1,0 +1,52 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "webdam"
+  title: "WebDam"
+  version: "1.0.0"
+  contact:
+    name: "Sathyanarayanan"
+    email: "slakshmanan@coach.com"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/webdam"
+        timeout: 60
+        verb: "POST"
+        cache-response: "protocol"
+        cache-ttl: 900
+        stop-on-error: []
+  phase: "realized"
+paths:
+  /webdam:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "x-amz-sns-message-type"
+        type: "string"
+        required: true
+        in: "header"
+definitions: {}
+tags: []

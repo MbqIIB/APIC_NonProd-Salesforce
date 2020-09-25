@@ -1,0 +1,73 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "customerlookup"
+  title: "CustomerLookup"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        title: "invoke"
+        timeout: 10
+        verb: "POST"
+        cache-response: "no-cache"
+        cache-ttl: 900
+        stop-on-error: []
+        version: "1.0.0"
+        target-url: "http://cap-sg-prd-1.integration.ibmcloud.com:16838/CustomerLookup"
+  phase: "realized"
+  properties:
+    APIC_SG_DP_URL:
+      value: ""
+      description: ""
+      encoded: false
+  catalogs:
+    QA:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18598/CustomerLookup"
+    Sandbox:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-2.securegateway.appdomain.cloud:18686/CustomerLookup"
+    QA2:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/CustomerLookup"
+    PROD:
+      properties:
+        APIC_SG_DP_URL: "http://cap-sg-prd-5.securegateway.appdomain.cloud:18999/CustomerLookup"
+paths:
+  /CustomerLookup:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+tags: []
+basePath: "/Customer"

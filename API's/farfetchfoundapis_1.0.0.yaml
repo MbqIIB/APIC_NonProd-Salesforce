@@ -1,0 +1,1334 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "farfetchfoundapis"
+  title: "FarFetchFoundAPIs"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - gatewayscript:
+        title: "gatewayscript"
+        version: "1.0.0"
+        source: "var payload = apim.getvariable('message.body');\r\nvar paths = apim.getvariable('request.path');\r\
+          \nvar path = paths.split(\"/\");\r\n\r\n\r\nsession.output.write(payload);\r\
+          \n//apim.setvariable('message.headers.soapaction',path[2]);\r\napim.setvariable('request.headers.soapaction',path[2]);\r\
+          \napim.setvariable('message.headers.soapaction',path[2]);\r\n//session.output.write('message.headers.soapaction');\r\
+          \n\r\napim.output('*/*');"
+    - switch:
+        title: "switch"
+        case:
+        - condition: "apim.getvariable('request.headers.soapaction')=='GetInventoryByProductPartNoOrOptionValue'"
+          execute:
+          - map:
+              title: "map"
+              inputs:
+                JSON:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      GetInventoryByProductPartNoOrOptionValue:
+                        type: "object"
+                        properties:
+                          ClientName:
+                            type: "string"
+                            name: "ClientName"
+                          Guid:
+                            type: "string"
+                            name: "Guid"
+                          AffiliateExternalID:
+                            type: "string"
+                            name: "AffiliateExternalID"
+                          SupplierFullNames:
+                            type: "string"
+                            name: "SupplierFullNames"
+                          PartnoOrOptionValueAndQty:
+                            type: "string"
+                            name: "PartnoOrOptionValueAndQty"
+                          ProcessingOptions:
+                            type: "string"
+                            name: "ProcessingOptions"
+                        name: "GetInventoryByProductPartNoOrOptionValue"
+                    example: "{\n  \"GetInventoryByProductPartNoOrOptionValue\":{\n\
+                      \    \"ClientName\": \"coach\",\n    \"Guid\": \"100\",\n  \
+                      \  \"AffiliateExternalID\": \"09201\",\n    \"SupplierFullNames\"\
+                      : \"ALL\",\n    \"PartnoOrOptionValueAndQty\": \"022548305706|1\"\
+                      ,\n    \"ProcessingOptions\":\"online\"\n  }\n}"
+                  variable: "message.body"
+                  content: "application/json"
+              outputs:
+                XML:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      Envelope:
+                        type: "object"
+                        properties:
+                          Body:
+                            type: "object"
+                            properties:
+                              GetInventoryByProductPartNoOrOptionValue:
+                                type: "object"
+                                properties:
+                                  ClientName:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "ClientName"
+                                  Guid:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "Guid"
+                                  AffiliateExternalID:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "AffiliateExternalID"
+                                  SupplierFullNames:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "SupplierFullNames"
+                                  PartnoOrOptionValueAndQty:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "PartnoOrOptionValueAndQty"
+                                  ProcessingOptions:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "ProcessingOptions"
+                                xml:
+                                  namespace: "http://api.shopvisible.com/"
+                                name: "GetInventoryByProductPartNoOrOptionValue"
+                            name: "Body"
+                        xml:
+                          namespace: "http://schemas.xmlsoap.org/soap/envelope/"
+                          prefix: "s"
+                        name: "Envelope"
+                    xml:
+                      namespace: ""
+                    example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<s:Envelope\
+                      \ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n\
+                      \  <s:Body xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                      \ xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n    <GetInventoryByProductPartNoOrOptionValue\
+                      \ xmlns=\"http://api.shopvisible.com/\">\r\n      <ClientName>coach</ClientName>\r\
+                      \n      <Guid>100</Guid>\r\n      <AffiliateExternalID>09201</AffiliateExternalID>\r\
+                      \n      <SupplierFullNames>ALL</SupplierFullNames>\r\n     \
+                      \ <PartnoOrOptionValueAndQty>022548305706|1</PartnoOrOptionValueAndQty>\r\
+                      \n      <ProcessingOptions>online</ProcessingOptions>\r\n  \
+                      \  </GetInventoryByProductPartNoOrOptionValue>\r\n  </s:Body>\r\
+                      \n</s:Envelope>"
+                  variable: "message.body"
+                  content: "application/xml"
+              actions:
+              - set: "XML.Envelope.Body.GetInventoryByProductPartNoOrOptionValue.ClientName"
+                from: "JSON.GetInventoryByProductPartNoOrOptionValue.ClientName"
+              - set: "XML.Envelope.Body.GetInventoryByProductPartNoOrOptionValue.Guid"
+                from: "JSON.GetInventoryByProductPartNoOrOptionValue.Guid"
+              - set: "XML.Envelope.Body.GetInventoryByProductPartNoOrOptionValue.AffiliateExternalID"
+                from: "JSON.GetInventoryByProductPartNoOrOptionValue.AffiliateExternalID"
+              - set: "XML.Envelope.Body.GetInventoryByProductPartNoOrOptionValue.SupplierFullNames"
+                from: "JSON.GetInventoryByProductPartNoOrOptionValue.SupplierFullNames"
+              - set: "XML.Envelope.Body.GetInventoryByProductPartNoOrOptionValue.PartnoOrOptionValueAndQty"
+                from: "JSON.GetInventoryByProductPartNoOrOptionValue.PartnoOrOptionValueAndQty"
+              - set: "XML.Envelope.Body.GetInventoryByProductPartNoOrOptionValue.ProcessingOptions"
+                from: "JSON.GetInventoryByProductPartNoOrOptionValue.ProcessingOptions"
+              version: "1.0.0"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/ProductService"
+          - map:
+              title: "map"
+              inputs:
+                ResponseXML:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      Envelope:
+                        type: "object"
+                        properties:
+                          Body:
+                            type: "object"
+                            properties:
+                              GetInventoryByProductPartNoOrOptionValueResponse:
+                                type: "object"
+                                properties:
+                                  GetInventoryByProductPartNoOrOptionValueResult:
+                                    type: "object"
+                                    properties:
+                                      ProductSuppliers:
+                                        type: "object"
+                                        properties:
+                                          ProductSupplier:
+                                            type: "object"
+                                            properties:
+                                              SupplierFullName:
+                                                type: "string"
+                                                xml:
+                                                  namespace: ""
+                                                name: "SupplierFullName"
+                                              Products:
+                                                type: "object"
+                                                properties:
+                                                  Product:
+                                                    type: "object"
+                                                    properties:
+                                                      ProductPartNo:
+                                                        type: "string"
+                                                        xml:
+                                                          namespace: ""
+                                                        name: "ProductPartNo"
+                                                      ProductUPC:
+                                                        type: "string"
+                                                        xml:
+                                                          namespace: ""
+                                                        name: "ProductUPC"
+                                                      ProductDescription:
+                                                        type: "string"
+                                                        xml:
+                                                          namespace: ""
+                                                        name: "ProductDescription"
+                                                      ProductInventoryStatus:
+                                                        type: "string"
+                                                        xml:
+                                                          namespace: ""
+                                                        name: "ProductInventoryStatus"
+                                                      ProductQTY:
+                                                        type: "string"
+                                                        xml:
+                                                          namespace: ""
+                                                        name: "ProductQTY"
+                                                      ProductVerificationRequiredCode:
+                                                        type: "string"
+                                                        xml:
+                                                          namespace: ""
+                                                        name: "ProductVerificationRequiredCode"
+                                                      ProductStockStatus:
+                                                        type: "string"
+                                                        xml:
+                                                          namespace: ""
+                                                        name: "ProductStockStatus"
+                                                    xml:
+                                                      namespace: ""
+                                                    name: "Product"
+                                                xml:
+                                                  namespace: ""
+                                                name: "Products"
+                                            xml:
+                                              namespace: ""
+                                            name: "ProductSupplier"
+                                          Response:
+                                            type: "object"
+                                            properties:
+                                              ResponseHasErrors:
+                                                type: "string"
+                                                xml:
+                                                  namespace: ""
+                                                name: "ResponseHasErrors"
+                                              ResponseCode:
+                                                type: "string"
+                                                xml:
+                                                  namespace: ""
+                                                name: "ResponseCode"
+                                              ResponseDescription:
+                                                type: "string"
+                                                xml:
+                                                  namespace: ""
+                                                name: "ResponseDescription"
+                                            xml:
+                                              namespace: ""
+                                            name: "Response"
+                                        xml:
+                                          namespace: " http://www.w3.org/2001/XMLSchema-instance"
+                                        name: "ProductSuppliers"
+                                    xml:
+                                      namespace: ""
+                                    name: "GetInventoryByProductPartNoOrOptionValueResult"
+                                xml:
+                                  namespace: "http://api.shopvisible.com/"
+                                name: "GetInventoryByProductPartNoOrOptionValueResponse"
+                            name: "Body"
+                        xml:
+                          namespace: "http://schemas.xmlsoap.org/soap/envelope/"
+                          prefix: "soap"
+                        name: "Envelope"
+                    xml:
+                      namespace: ""
+                    example: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<soap:Envelope\r\
+                      \n    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\r\n   \
+                      \ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\
+                      \    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                      >\r\n    <soap:Body>\r\n        <GetInventoryByProductPartNoOrOptionValueResponse\r\
+                      \n            xmlns=\"http://api.shopvisible.com/\">\r\n   \
+                      \         <GetInventoryByProductPartNoOrOptionValueResult>\r\
+                      \n                <ProductSuppliers\r\n                    xmlns=\"\
+                      \"\r\n                    xmlns:xsd=\" http://www.w3.org/2001/XMLSchema\"\
+                      \r\n                    xmlns:xsi=\" http://www.w3.org/2001/XMLSchema-instance\"\
+                      >\r\n                    <ProductSupplier>\r\n             \
+                      \           <SupplierFullName>ALL</SupplierFullName>\r\n   \
+                      \                     <Products>\r\n                       \
+                      \     <Product>\r\n                                <ProductPartNo>022548305706</ProductPartNo>\r\
+                      \n                                <ProductUPC>022548305706</ProductUPC>\r\
+                      \n                                <ProductDescription>xxx</ProductDescription>\r\
+                      \n                                <ProductInventoryStatus>1</ProductInventoryStatus>\r\
+                      \n                                <ProductQTY>99831</ProductQTY>\r\
+                      \n                                <ProductVerificationRequiredCode>Y</ProductVerificationRequiredCode>\r\
+                      \n                                <ProductStockStatus>IN STOCK!</ProductStockStatus>\r\
+                      \n                            </Product>\r\n               \
+                      \         </Products>\r\n                    </ProductSupplier>\r\
+                      \n                    <Response>\r\n                       \
+                      \ <ResponseHasErrors>false</ResponseHasErrors>\r\n         \
+                      \               <ResponseCode>SUCCESS</ResponseCode>\r\n   \
+                      \                     <ResponseDescription>Product Supplier\
+                      \ Inventory returned successfully</ResponseDescription>\r\n\
+                      \                    </Response>\r\n                </ProductSuppliers>\r\
+                      \n            </GetInventoryByProductPartNoOrOptionValueResult>\r\
+                      \n        </GetInventoryByProductPartNoOrOptionValueResponse>\r\
+                      \n    </soap:Body>\r\n</soap:Envelope>"
+                  variable: "message.body"
+                  content: "application/xml"
+              outputs:
+                responseJSON:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      Status:
+                        type: "string"
+                        name: "Status"
+                      Description:
+                        type: "string"
+                        name: "Description"
+                      GetInventoryByProductPartNoOrOptionValueResponse:
+                        type: "object"
+                        properties:
+                          GetInventoryByProductPartNoOrOptionValueResult:
+                            type: "object"
+                            properties:
+                              ProductSuppliers:
+                                type: "object"
+                                properties:
+                                  ProductSupplier:
+                                    type: "object"
+                                    properties:
+                                      SupplierFullName:
+                                        type: "string"
+                                        name: "SupplierFullName"
+                                      Products:
+                                        type: "object"
+                                        properties:
+                                          Product:
+                                            type: "object"
+                                            properties:
+                                              ProductPartNo:
+                                                type: "string"
+                                                name: "ProductPartNo"
+                                              ProductUPC:
+                                                type: "string"
+                                                name: "ProductUPC"
+                                              ProductDescription:
+                                                type: "string"
+                                                name: "ProductDescription"
+                                              ProductInventoryStatus:
+                                                type: "string"
+                                                name: "ProductInventoryStatus"
+                                              ProductQTY:
+                                                type: "string"
+                                                name: "ProductQTY"
+                                              ProductVerificationRequiredCode:
+                                                type: "string"
+                                                name: "ProductVerificationRequiredCode"
+                                              ProductStockStatus:
+                                                type: "string"
+                                                name: "ProductStockStatus"
+                                            name: "Product"
+                                        name: "Products"
+                                    name: "ProductSupplier"
+                                name: "ProductSuppliers"
+                            name: "GetInventoryByProductPartNoOrOptionValueResult"
+                        name: "GetInventoryByProductPartNoOrOptionValueResponse"
+                    example: "{\n    \"Status\": \"SUCCESS\",\n    \"Description\"\
+                      : \"Product Supplier Inventory returned successfully\",\n  \"\
+                      GetInventoryByProductPartNoOrOptionValueResponse\":{\n     \
+                      \   \"GetInventoryByProductPartNoOrOptionValueResult\":{\n \
+                      \       \"ProductSuppliers\":{\n          \"ProductSupplier\"\
+                      :\n            {\n              \"SupplierFullName\": \"\",\n\
+                      \              \"Products\": {\n                \"Product\"\
+                      : \n                  {\n                    \"ProductPartNo\"\
+                      : \"\",\n                    \"ProductUPC\": \"\",\n       \
+                      \             \"ProductDescription\": \"\",\n              \
+                      \      \"ProductInventoryStatus\": \"\",\n                 \
+                      \   \"ProductQTY\": \"\",\n                    \"ProductVerificationRequiredCode\"\
+                      : \"\",\n                    \"ProductStockStatus\": \"\"\n\
+                      \                  }\n            }\n          }\n      }\n\
+                      \    }\n  }\n}"
+                  variable: "message.body"
+                  content: "application/json"
+              actions:
+              - set: "responseJSON.Status"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.Response.ResponseCode"
+              - set: "responseJSON.Description"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.Response.ResponseDescription"
+              - set: "responseJSON.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductPartNo"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductPartNo"
+              - set: "responseJSON.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductUPC"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductUPC"
+              - set: "responseJSON.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductDescription"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductDescription"
+              - set: "responseJSON.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductInventoryStatus"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductInventoryStatus"
+              - set: "responseJSON.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductQTY"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductQTY"
+              - set: "responseJSON.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductVerificationRequiredCode"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductVerificationRequiredCode"
+              - set: "responseJSON.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductStockStatus"
+                from: "ResponseXML.Envelope.Body.GetInventoryByProductPartNoOrOptionValueResponse.GetInventoryByProductPartNoOrOptionValueResult.ProductSuppliers.ProductSupplier.Products.Product.ProductStockStatus"
+              version: "1.0.0"
+        - condition: "apim.getvariable('request.headers.soapaction')=='SubmitNewOrdersWithPaymentAdvanced'"
+          execute:
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/OrderService"
+        - condition: "apim.getvariable('request.headers.soapaction')=='GetProductInventoryAroundLocation'"
+          execute:
+          - map:
+              title: "map"
+              inputs:
+                Body:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      GetProductInventoryAroundLocation:
+                        type: "object"
+                        properties:
+                          ClientName:
+                            type: "string"
+                            name: "ClientName"
+                          Guid:
+                            type: "string"
+                            name: "Guid"
+                          AffiliateExternalID:
+                            type: "string"
+                            name: "AffiliateExternalID"
+                          SearchRadias:
+                            type: "string"
+                            name: "SearchRadias"
+                          SourcePostalCode:
+                            type: "string"
+                            name: "SourcePostalCode"
+                          SourceCountry:
+                            type: "string"
+                            name: "SourceCountry"
+                          PartnoOrOptionValueAndQty:
+                            type: "string"
+                            name: "PartnoOrOptionValueAndQty"
+                          ProcessingOptions:
+                            type: "string"
+                            name: "ProcessingOptions"
+                        name: "GetProductInventoryAroundLocation"
+                    example: "{\n  \"GetProductInventoryAroundLocation\": {\n  \"\
+                      ClientName\": \"StuartWeitzman_Staging\",\n  \"Guid\": \"ca82c2f5-3ce2-e611-8105-06a33a6db6fd\"\
+                      ,\n  \"AffiliateExternalID\": \"09201\",\n  \"SearchRadias\"\
+                      : \"3218688\",\n  \"SourcePostalCode\": \"10001\" ,\n  \"SourceCountry\"\
+                      : \"US\",\n  \"PartnoOrOptionValueAndQty\": \"725125948753|1,022548305706|1\"\
+                      ,\n  \"ProcessingOptions\": \"AllItemsAvailable=true;DistanceMetric=1\"\
+                      \  \n  }\n}"
+                  variable: "request.body"
+                  content: "application/json"
+              outputs:
+                response:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      Envelope:
+                        type: "object"
+                        properties:
+                          Body:
+                            type: "object"
+                            properties:
+                              GetProductInventoryAroundLocation:
+                                type: "object"
+                                properties:
+                                  ClientName:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "ClientName"
+                                  Guid:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "Guid"
+                                  AffiliateExternalID:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "AffiliateExternalID"
+                                  SearchRadias:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "SearchRadias"
+                                  SourcePostalCode:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "SourcePostalCode"
+                                  SourceCountry:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "SourceCountry"
+                                  PartnoOrOptionValueAndQty:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "PartnoOrOptionValueAndQty"
+                                  ProcessingOptions:
+                                    type: "string"
+                                    xml:
+                                      namespace: ""
+                                    name: "ProcessingOptions"
+                                xml:
+                                  namespace: "http://api.shopvisible.com/"
+                                name: "GetProductInventoryAroundLocation"
+                            name: "Body"
+                        xml:
+                          namespace: "http://schemas.xmlsoap.org/soap/envelope/"
+                          prefix: "s"
+                        name: "Envelope"
+                    xml:
+                      namespace: ""
+                    example: "<s:Envelope \n                xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                      > \n                <s:Body \n                             \
+                      \   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                      \ \n                                xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\
+                      > \n                                <GetProductInventoryAroundLocation\
+                      \ \n                                                xmlns=\"\
+                      http://api.shopvisible.com/\"> \n                          \
+                      \                      <ClientName>StuartWeitzman_Staging</ClientName>\
+                      \ \n                                                <Guid>ca82c2f5-3ce2-e611-8105-06a33a6db6fd</Guid>\
+                      \ \n                                                <AffiliateExternalID>09201</AffiliateExternalID>\
+                      \ \n                                                <SearchRadias>3218688</SearchRadias>\
+                      \ \n                                                <SourcePostalCode>10001</SourcePostalCode>\
+                      \ \n                                                <SourceCountry>US\
+                      \ </SourceCountry> \n                                      \
+                      \          <PartnoOrOptionValueAndQty>725125948753|1,022548305706|1</PartnoOrOptionValueAndQty>\
+                      \ \n                                                <ProcessingOptions>AllItemsAvailable=true;DistanceMetric=1</ProcessingOptions>\
+                      \ \n                                </GetProductInventoryAroundLocation>\
+                      \ \n                </s:Body> \n</s:Envelope> "
+                  variable: "message.body"
+                  content: "application/xml"
+              actions:
+              - set: "response.Envelope.Body.GetProductInventoryAroundLocation"
+                from: "Body.GetProductInventoryAroundLocation"
+              version: "1.0.0"
+          - xslt:
+              title: "xslt"
+              input: false
+              version: "1.0.0"
+              source: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet\
+                \ version=\"1.0\"\r\n  xmlns:b=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                \r\n  xmlns:c=\"http://api.shopvisible.com/\"\r\n  xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\
+                \r\n  xmlns:dp=\"http://www.datapower.com/extensions\"\r\n  xmlns:func=\"\
+                http://exslt.org/functions\"\r\n  xmlns:apim=\"http://www.ibm.com/apimanagement\"\
+                \ extension-element-prefixes=\"dp func apim\">\r\n\r\n  <!-- Contains\
+                \ the APIM functions -->\r\n  <xsl:import href=\"local:///isp/policy/apim.custom.xsl\"\
+                \ />\r\n\r\n  <xsl:template match=\"/\">\r\n    <xsl:variable name=\"\
+                input\" select=\"apim:payloadRead()\" />\r\n    \r\n  <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'ClientName'\" />\r\n    <xsl:with-param name=\"value\"\
+                \ select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:ClientName\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'Guid'\" />\r\n    <xsl:with-param name=\"value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:Guid\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'AffiliateExternalID'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:AffiliateExternalID\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'SearchRadias'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SearchRadias\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n  <xsl:with-param name=\"varName\" select=\"\
+                'SourcePostalCode'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SourcePostalCode\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n  <xsl:call-template name=\"\
+                apim:setVariable\">\r\n    <xsl:with-param name=\"varName\" select=\"\
+                'SourceCountry'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:SourceCountry\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n      <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'PartnoOrOptionValueAndQty'\" />\r\n    <xsl:with-param\
+                \ name=\"value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:PartnoOrOptionValueAndQty\"\
+                \ />\r\n    </xsl:call-template>\r\n    \r\n   \r\n    <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n    <xsl:with-param name=\"varName\"\
+                \ select=\"'ProcessingOptions'\" />\r\n    <xsl:with-param name=\"\
+                value\" select=\"$input/b:Envelope/b:Body/c:GetProductInventoryAroundLocation/c:ProcessingOptions\"\
+                \ />\r\n    </xsl:call-template>\r\n\r\n    \r\n  </xsl:template>\r\
+                \n</xsl:stylesheet>"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "GET"
+              cache-response: "protocol"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "https://maps.googleapis.com/maps/api/geocode/xml?address=$(SourcePostalCode)&key=AIzaSyCDu6VshFQcHXaGY9aJ4hlYyU2QS5hlpog"
+          - xslt:
+              title: "xslt"
+              input: false
+              version: "1.0.0"
+              source: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet\
+                \ version=\"1.0\"\r\n  xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\
+                \r\n  xmlns:dp=\"http://www.datapower.com/extensions\"\r\n  xmlns:func=\"\
+                http://exslt.org/functions\"\r\n  xmlns:apim=\"http://www.ibm.com/apimanagement\"\
+                \ extension-element-prefixes=\"dp func apim\">\r\n\r\n  <!-- Contains\
+                \ the APIM functions -->\r\n  <xsl:import href=\"local:///isp/policy/apim.custom.xsl\"\
+                \ />\r\n\r\n  <xsl:template match=\"/\">\r\n    <xsl:variable name=\"\
+                input\" select=\"apim:payloadRead()\" />\r\n\r\n  <xsl:call-template\
+                \ name=\"apim:setVariable\">\r\n  <xsl:with-param name=\"varName\"\
+                \ select=\"'lat'\" />\r\n    <xsl:with-param name=\"value\" select=\"\
+                $input/GeocodeResponse/result/geometry/location/lat\" />\r\n   </xsl:call-template>\r\
+                \n   <xsl:call-template name=\"apim:setVariable\">\r\n  <xsl:with-param\
+                \ name=\"varName\" select=\"'lng'\" />\r\n    <xsl:with-param name=\"\
+                value\" select=\"$input/GeocodeResponse/result/geometry/location/lng\"\
+                \ />\r\n    </xsl:call-template>\r\n  </xsl:template>\r\n </xsl:stylesheet>"
+          - gatewayscript:
+              title: "gatewayscript"
+              version: "1.0.0"
+              source: "//var transform = require('transform');\r\n\r\nvar ClientName\
+                \ = apim.getvariable('ClientName');\r\nvar Guid = apim.getvariable('Guid');\r\
+                \nvar AffiliateExternalID = apim.getvariable('AffiliateExternalID');\r\
+                \nvar SearchRadias = apim.getvariable('SearchRadias');\r\nvar SourcePostalCode\
+                \ = apim.getvariable('SourcePostalCode');\r\nvar SourceCountry = apim.getvariable('SourceCountry');\r\
+                \nvar PartnoOrOptionValueAndQty = apim.getvariable('PartnoOrOptionValueAndQty');\r\
+                \nvar ProcessingOptions = apim.getvariable('ProcessingOptions');\r\
+                \nvar SOAPAction= apim.getvariable('request.headers.soapaction');\r\
+                \nvar lat = apim.getvariable('lat');\r\nvar lng = apim.getvariable('lng');\r\
+                \n\r\n//var test1 = XML.stringify( {omitXmlDeclaration: true}, input);\r\
+                \n\r\n\r\n//var test1 = XML.stringify( {omitXmlDeclaration: true},\
+                \ input);\r\n\r\nvar GeocodeResponse ='<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                ><s:Body xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"\
+                http://www.w3.org/2001/XMLSchema\"><GetProductInventoryAroundLocation\
+                \ xmlns=\"http://api.shopvisible.com/\"><ClientName>'+ClientName+'</ClientName><Guid>'+Guid+'</Guid><AffiliateExternalID>'+AffiliateExternalID+'</AffiliateExternalID><SearchRadias>'+SearchRadias+'</SearchRadias><SourcePostalCode>'+SourcePostalCode+'</SourcePostalCode><SourceCountry>'+SourceCountry+'</SourceCountry><PartnoOrOptionValueAndQty>'+PartnoOrOptionValueAndQty+'</PartnoOrOptionValueAndQty><ProcessingOptions>'+ProcessingOptions+'</ProcessingOptions><lat>'+lat+'</lat><lng>'+lng+'</lng></GetProductInventoryAroundLocation></s:Body></s:Envelope>';\r\
+                \n\t\t\r\n    session.output.write(GeocodeResponse);\r\n    \r\n \
+                \   \r\n  //  apim.output('application/xml');\r\napim.setvariable('message.headers.soapaction',SOAPAction);\r\
+                \napim.output('*/*');\r\n\r\n\r\n"
+          - invoke:
+              title: "invoke"
+              timeout: 60
+              verb: "POST"
+              cache-response: "no-cache"
+              cache-ttl: 900
+              stop-on-error:
+              - null
+              version: "1.0.0"
+              target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/ProductService"
+          - map:
+              title: "map"
+              inputs:
+                Body:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      Envelope:
+                        type: "object"
+                        properties:
+                          Body:
+                            type: "object"
+                            properties:
+                              GetProductInventoryAroundLocationResponse:
+                                type: "object"
+                                properties:
+                                  GetProductInventoryAroundLocationResult:
+                                    type: "object"
+                                    properties:
+                                      ProductSuppliers:
+                                        type: "object"
+                                        properties:
+                                          ProductSupplier:
+                                            type: "array"
+                                            items:
+                                              properties:
+                                                SupplierFullName:
+                                                  type: "string"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "SupplierFullName"
+                                                SupplierAddress:
+                                                  type: "string"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "SupplierAddress"
+                                                SupplierCity:
+                                                  type: "string"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "SupplierCity"
+                                                SupplierStateProvince:
+                                                  type: "string"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "SupplierStateProvince"
+                                                SupplierPostalCode:
+                                                  type: "string"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "SupplierPostalCode"
+                                                SupplierCountry:
+                                                  type: "string"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "SupplierCountry"
+                                                SupplierDistance:
+                                                  type: "string"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "SupplierDistance"
+                                                Products:
+                                                  type: "object"
+                                                  properties:
+                                                    Product:
+                                                      type: "array"
+                                                      items:
+                                                        properties:
+                                                          ProductPartNo:
+                                                            type: "string"
+                                                            xml:
+                                                              namespace: ""
+                                                            name: "ProductPartNo"
+                                                          ProductUPC:
+                                                            type: "string"
+                                                            xml:
+                                                              namespace: ""
+                                                            name: "ProductUPC"
+                                                          ProductDescription:
+                                                            type: "string"
+                                                            xml:
+                                                              namespace: ""
+                                                            name: "ProductDescription"
+                                                          ProductQTY:
+                                                            type: "string"
+                                                            xml:
+                                                              namespace: ""
+                                                            name: "ProductQTY"
+                                                          ProductInventoryStatus:
+                                                            type: "string"
+                                                            xml:
+                                                              namespace: ""
+                                                            name: "ProductInventoryStatus"
+                                                          ProductStockStatus:
+                                                            type: "string"
+                                                            xml:
+                                                              namespace: ""
+                                                            name: "ProductStockStatus"
+                                                        type: "object"
+                                                        xml:
+                                                          namespace: ""
+                                                      name: "Product"
+                                                  xml:
+                                                    namespace: ""
+                                                  name: "Products"
+                                              type: "object"
+                                              xml:
+                                                namespace: ""
+                                            name: "ProductSupplier"
+                                          Response:
+                                            type: "object"
+                                            properties:
+                                              ResponseHasErrors:
+                                                type: "string"
+                                                xml:
+                                                  namespace: ""
+                                                name: "ResponseHasErrors"
+                                              ResponseCode:
+                                                type: "string"
+                                                xml:
+                                                  namespace: ""
+                                                name: "ResponseCode"
+                                              ResponseDescription:
+                                                type: "string"
+                                                xml:
+                                                  namespace: ""
+                                                name: "ResponseDescription"
+                                            xml:
+                                              namespace: ""
+                                            name: "Response"
+                                        xml:
+                                          namespace: ""
+                                        name: "ProductSuppliers"
+                                    xml:
+                                      namespace: ""
+                                    name: "GetProductInventoryAroundLocationResult"
+                                xml:
+                                  namespace: "http://api.shopvisible.com/"
+                                name: "GetProductInventoryAroundLocationResponse"
+                            name: "Body"
+                        xml:
+                          namespace: "http://schemas.xmlsoap.org/soap/envelope/"
+                          prefix: "soap"
+                        name: "Envelope"
+                    xml:
+                      namespace: ""
+                    example: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope\n\
+                      \    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                      \n    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                      \n    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n    <soap:Body>\n\
+                      \        <GetProductInventoryAroundLocationResponse\n      \
+                      \      xmlns=\"http://api.shopvisible.com/\">\n            <GetProductInventoryAroundLocationResult>\n\
+                      \                <ProductSuppliers\n                    xmlns:xsi=\"\
+                      \ http://www.w3.org/2001/XMLSchema-instance\"\n            \
+                      \        xmlns:xsd=\" http://www.w3.org/2001/XMLSchema\"\n \
+                      \                   xmlns=\"\">\n                    <ProductSupplier>\n\
+                      \                        <SupplierFullName>02004</SupplierFullName>\n\
+                      \                        <SupplierAddress>South Market\nBuilding</SupplierAddress>\n\
+                      \                        <SupplierCity>Boston</SupplierCity>\n\
+                      \                        <SupplierStateProvince>MA</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>02109</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>303394.8502271413738000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC>725125948753</ProductUPC>\n\
+                      \                                <ProductDescription>BEAD CHAIN\
+                      \ MOD\nCAT;BLACK;ONE</ProductDescription>\n                \
+                      \                <ProductQTY>1</ProductQTY>\n              \
+                      \                  <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \          <Product>\n                                <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                        </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09106</SupplierFullName>\n         \
+                      \               <SupplierAddress>9127 Fashion Drive</SupplierAddress>\n\
+                      \                        <SupplierCity>Nanuet</SupplierCity>\n\
+                      \                        <SupplierStateProvince>NY</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>10954</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>461429.36517320021000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9987</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09107</SupplierFullName>\n         \
+                      \               <SupplierAddress>342 Madison Avenue (at 44th\n\
+                      St)</SupplierAddress>\n                        <SupplierCity>New\
+                      \ York</SupplierCity>\n                        <SupplierStateProvince>NY</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>10173</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>461429.36517320021000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9982</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09108</SupplierFullName>\n         \
+                      \               <SupplierAddress>26300 Cedar Road</SupplierAddress>\n\
+                      \                        <SupplierCity>Beachwood</SupplierCity>\n\
+                      \                        <SupplierStateProvince>OH</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>44122</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>461429.36517320021000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9978</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09109</SupplierFullName>\n         \
+                      \               <SupplierAddress>831 Madison Avenue</SupplierAddress>\n\
+                      \                        <SupplierCity>New York</SupplierCity>\n\
+                      \                        <SupplierStateProvince>NY</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>10021</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>31443.05960748598442000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9982</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09156</SupplierFullName>\n         \
+                      \               <SupplierAddress>JFK Pkwy &amp; Rte\n24</SupplierAddress>\n\
+                      \                        <SupplierCity>Short Hills</SupplierCity>\n\
+                      \                        <SupplierStateProvince>NJ</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>07078</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>26900.01931845771918000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9988</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09202</SupplierFullName>\n         \
+                      \               <SupplierAddress>10 Hudson Yards</SupplierAddress>\n\
+                      \                        <SupplierCity>New York</SupplierCity>\n\
+                      \                        <SupplierStateProvince>NY</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>10001</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>461429.36517320021000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9979</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09203</SupplierFullName>\n         \
+                      \               <SupplierAddress>10 Hudson Yards</SupplierAddress>\n\
+                      \                        <SupplierCity>New York</SupplierCity>\n\
+                      \                        <SupplierStateProvince>NY</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>10001</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>461429.36517320021000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9980</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09204</SupplierFullName>\n         \
+                      \               <SupplierAddress>10 Hudson Yards</SupplierAddress>\n\
+                      \                        <SupplierCity>New York</SupplierCity>\n\
+                      \                        <SupplierStateProvince>NY</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>10001</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>461429.36517320021000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9980</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09205</SupplierFullName>\n         \
+                      \               <SupplierAddress>10 Hudson Yards</SupplierAddress>\n\
+                      \                        <SupplierCity>New York</SupplierCity>\n\
+                      \                        <SupplierStateProvince>NY</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>10001</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>461429.36517320021000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9978</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <ProductSupplier>\n                   \
+                      \     <SupplierFullName>09553</SupplierFullName>\n         \
+                      \               <SupplierAddress>233 King Street</SupplierAddress>\n\
+                      \                        <SupplierCity>Charleston</SupplierCity>\n\
+                      \                        <SupplierStateProvince>SC</SupplierStateProvince>\n\
+                      \                        <SupplierPostalCode>29401</SupplierPostalCode>\n\
+                      \                        <SupplierCountry>US</SupplierCountry>\n\
+                      \                        <SupplierDistance>1031870.8878682534000</SupplierDistance>\n\
+                      \                        <Products>\n                      \
+                      \      <Product>\n                                <ProductPartNo>725125948753</ProductPartNo>\n\
+                      \                                <ProductUPC/>\n           \
+                      \                     <ProductDescription/>\n              \
+                      \                  <ProductQTY/>\n                         \
+                      \       <ProductInventoryStatus>2</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>OUT OF\n\
+                      STOCK!</ProductStockStatus>\n                            </Product>\n\
+                      \                            <Product>\n                   \
+                      \             <ProductPartNo>022548305706</ProductPartNo>\n\
+                      \                                <ProductUPC>022548305706</ProductUPC>\n\
+                      \                                <ProductDescription>xxx</ProductDescription>\n\
+                      \                                <ProductQTY>9992</ProductQTY>\n\
+                      \                                <ProductInventoryStatus>1</ProductInventoryStatus>\n\
+                      \                                <ProductVerificationRequiredCode/>\n\
+                      \                                <ProductStockStatus>IN\nSTOCK!</ProductStockStatus>\n\
+                      \                            </Product>\n                  \
+                      \      </Products>\n                    </ProductSupplier>\n\
+                      \                    <Response>\n                        <ResponseHasErrors>false</ResponseHasErrors>\n\
+                      \                        <ResponseCode>SUCCESS</ResponseCode>\n\
+                      \                        <ResponseDescription>Product Supplier\
+                      \ Inventory\nreturned successfully</ResponseDescription>\n \
+                      \                   </Response>\n                </ProductSuppliers>\n\
+                      \            </GetProductInventoryAroundLocationResult>\n  \
+                      \      </GetProductInventoryAroundLocationResponse>\n    </soap:Body>\n\
+                      \n</soap:Envelope>"
+                  variable: "message.body"
+                  content: "application/xml"
+              outputs:
+                response:
+                  schema:
+                    description: ""
+                    type: "object"
+                    properties:
+                      Status:
+                        type: "string"
+                        name: "Status"
+                      Description:
+                        type: "string"
+                        name: "Description"
+                      GetProductInventoryAroundLocationResponse:
+                        type: "object"
+                        properties:
+                          GetProductInventoryAroundLocationResult:
+                            type: "object"
+                            properties:
+                              ProductSuppliers:
+                                type: "object"
+                                properties:
+                                  ProductSupplier:
+                                    type: "array"
+                                    items:
+                                      properties:
+                                        SupplierFullName:
+                                          type: "string"
+                                          name: "SupplierFullName"
+                                        SupplierAddress:
+                                          type: "string"
+                                          name: "SupplierAddress"
+                                        SupplierCity:
+                                          type: "string"
+                                          name: "SupplierCity"
+                                        SupplierStateProvince:
+                                          type: "string"
+                                          name: "SupplierStateProvince"
+                                        SupplierPostalCode:
+                                          type: "string"
+                                          name: "SupplierPostalCode"
+                                        SupplierCountry:
+                                          type: "string"
+                                          name: "SupplierCountry"
+                                        SupplierDistance:
+                                          type: "string"
+                                          name: "SupplierDistance"
+                                        Products:
+                                          type: "object"
+                                          properties:
+                                            Product:
+                                              type: "array"
+                                              items:
+                                                properties:
+                                                  ProductPartNo:
+                                                    type: "string"
+                                                    name: "ProductPartNo"
+                                                  ProductUPC:
+                                                    type: "string"
+                                                    name: "ProductUPC"
+                                                  ProductDescription:
+                                                    type: "string"
+                                                    name: "ProductDescription"
+                                                  ProductQTY:
+                                                    type: "string"
+                                                    name: "ProductQTY"
+                                                  ProductInventoryStatus:
+                                                    type: "string"
+                                                    name: "ProductInventoryStatus"
+                                                  ProductStockStatus:
+                                                    type: "string"
+                                                    name: "ProductStockStatus"
+                                                type: "object"
+                                              name: "Product"
+                                          name: "Products"
+                                      type: "object"
+                                    name: "ProductSupplier"
+                                name: "ProductSuppliers"
+                            name: "GetProductInventoryAroundLocationResult"
+                        name: "GetProductInventoryAroundLocationResponse"
+                    example: "{\n    \"Status\": \"\",\n    \"Description\": \"\"\
+                      ,\n      \"GetProductInventoryAroundLocationResponse\": {\n\
+                      \         \"GetProductInventoryAroundLocationResult\": {\n \
+                      \         \"ProductSuppliers\": {\n            \"ProductSupplier\"\
+                      : [\n              {\n                \"SupplierFullName\":\
+                      \ \"02004\",\n                \"SupplierAddress\": \"South Market\
+                      \ Building\",\n                \"SupplierCity\": \"Boston\"\
+                      ,\n                \"SupplierStateProvince\": \"MA\",\n    \
+                      \            \"SupplierPostalCode\": \"02109\",\n          \
+                      \      \"SupplierCountry\": \"US\",\n                \"SupplierDistance\"\
+                      : \"303394.8502271413738000\",\n                \"Products\"\
+                      : {\n                  \"Product\": [\n                    {\n\
+                      \                      \"ProductPartNo\": \"725125948753\",\n\
+                      \                      \"ProductUPC\": \"725125948753\",\n \
+                      \                     \"ProductDescription\": \"BEAD CHAIN MOD\
+                      \ CAT;BLACK;ONE\",\n                      \"ProductQTY\": \"\
+                      1\",\n                      \"ProductInventoryStatus\": \"1\"\
+                      ,\n                      \"ProductStockStatus\": \"IN STOCK!\"\
+                      \n                    },\n                    {\n          \
+                      \            \"ProductPartNo\": \"022548305706\",\n        \
+                      \              \"ProductInventoryStatus\": \"2\",\n        \
+                      \              \"ProductStockStatus\": \"OUT OF STOCK!\"\n \
+                      \                   }\n                  ]\n               \
+                      \ }\n              }\n            ]          \n           }\n\
+                      \        }\n      }\n    }"
+                  variable: "message.body"
+                  content: "application/json"
+              actions:
+              - set: "response.Status"
+                from: "Body.Envelope.Body.GetProductInventoryAroundLocationResponse.GetProductInventoryAroundLocationResult.ProductSuppliers.Response.ResponseCode"
+              - set: "response.Description"
+                from: "Body.Envelope.Body.GetProductInventoryAroundLocationResponse.GetProductInventoryAroundLocationResult.ProductSuppliers.Response.ResponseDescription"
+              - create: "response.GetProductInventoryAroundLocationResponse.GetProductInventoryAroundLocationResult.ProductSuppliers.ProductSupplier"
+                foreach: "Body.Envelope.Body.GetProductInventoryAroundLocationResponse.GetProductInventoryAroundLocationResult.ProductSuppliers.ProductSupplier"
+                from: "Body.Envelope.Body.GetProductInventoryAroundLocationResponse.GetProductInventoryAroundLocationResult.ProductSuppliers.ProductSupplier"
+                actions:
+                - set: "SupplierFullName"
+                  from: "SupplierFullName"
+                - set: "SupplierAddress"
+                  from: "SupplierAddress"
+                - set: "SupplierCity"
+                  from: "SupplierCity"
+                - set: "SupplierStateProvince"
+                  from: "SupplierStateProvince"
+                - set: "SupplierPostalCode"
+                  from: "SupplierPostalCode"
+                - set: "SupplierCountry"
+                  from: "SupplierCountry"
+                - set: "SupplierDistance"
+                  from: "SupplierDistance"
+                - create: "Products.Product"
+                  foreach: "Products.Product"
+                  from: "Products.Product"
+                  actions:
+                  - set: "ProductPartNo"
+                    from: "ProductPartNo"
+                  - set: "ProductUPC"
+                    from: "ProductUPC"
+                  - set: "ProductDescription"
+                    from: "ProductDescription"
+                  - set: "ProductQTY"
+                    from: "ProductQTY"
+                  - set: "ProductInventoryStatus"
+                    from: "ProductInventoryStatus"
+                  - set: "ProductStockStatus"
+                    from: "ProductStockStatus"
+              version: "1.0.0"
+        - otherwise:
+          - throw:
+              title: "throw"
+              version: "1.0.0"
+              message: "Invalid Method Name"
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /ProductService/GetInventoryByProductPartNoOrOptionValue:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+  /ProductService/GetProductInventoryAroundLocation:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+  /OrderService/SubmitNewOrdersWithPaymentAdvanced:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+  /OrderService/GetOrderHeaders:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []
+consumes:
+- "application/json"
+produces:
+- "application/json"

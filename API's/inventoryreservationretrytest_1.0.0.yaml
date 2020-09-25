@@ -1,0 +1,45 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "inventoryreservationretrytest"
+  title: "InventoryReservation_Retry_test"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+consumes:
+- "application/xml"
+produces:
+- "application/xml"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "query"
+    name: "client_id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: false
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute: []
+    catch: []
+  phase: "realized"
+paths:
+  /Inventoryreservationretrytest:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+        description: "Request"
+definitions: {}
+tags: []

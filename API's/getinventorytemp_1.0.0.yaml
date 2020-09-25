@@ -1,0 +1,65 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getinventorytemp"
+  title: "GetInventory_temp"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/Product"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - set-variable:
+        title: "set-variable"
+        actions:
+        - set: "message.body"
+          value: "{ \t\"Status\": \"Success\", \t\"Description\": \"Inventory records\
+            \ follows\", \t\"Inventory\": [ \t\t{ \t\t\t\"ProductID\": \"191202001824\"\
+            , \t\t\t\"StoreNumber\": \"9228\", \t\t\t\"StoreQuantity\": 10, \t\t\t\
+            \"AllStoresQuantity\": \"\", \t\t\t\"WarehouseQuantity\": \"\", \t\t\t\
+            \"ReservedQuantity\": 0, \t\t\t\"ThresholdQuantity\": 0, \t\t\t\"IntransitQuantity\"\
+            : \"\", \t\t\t\"BackorderQuantity\": \"\", \t\t\t\"BackorderDate\": \"\
+            \", \t\t\t\"Distance\": 12 \t\t}, \t\t{ \t\t\t\"ProductID\": \"191202001947\"\
+            , \t\t\t\"StoreNumber\": \"9228\", \t\t\t\"StoreQuantity\": 5, \t\t\t\"\
+            AllStoresQuantity\": 326, \t\t\t\"WarehouseQuantity\": 5, \t\t\t\"ReservedQuantity\"\
+            : 0, \t\t\t\"ThresholdQuantity\": 0, \t\t\t\"IntransitQuantity\": \"\"\
+            , \t\t\t\"BackorderQuantity\": \"\", \t\t\t\"BackorderDate\": \"\", \t\
+            \t\t\"Distance\": 12 \t\t}, \t\t{ \t\t\t\"ProductID\": \"191202166967\"\
+            , \t\t\t\"StoreNumber\": \"9228\", \t\t\t\"StoreQuantity\": 11, \t\t\t\
+            \"AllStoresQuantity\": 0, \t\t\t\"WarehouseQuantity\": 0, \t\t\t\"ReservedQuantity\"\
+            : 0, \t\t\t\"ThresholdQuantity\": 0, \t\t\t\"IntransitQuantity\": \"\"\
+            , \t\t\t\"BackorderQuantity\": \"\", \t\t\t\"BackorderDate\": \"\", \t\
+            \t\t\"Distance\": 12 \t\t} \t] }"
+        version: "1.0.0"
+  phase: "realized"
+paths:
+  /GetInventory_temp:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []

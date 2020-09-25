@@ -1,0 +1,48 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getemaildetails"
+  title: "GetEmailDetails"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/Customer"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/Customer/GetEmailDetails"
+        timeout: 60
+        verb: "POST"
+        cache-response: "protocol"
+  phase: "realized"
+paths:
+  /GetEmailDetails:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Body"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+definitions: {}
+tags: []

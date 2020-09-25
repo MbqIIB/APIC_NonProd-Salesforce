@@ -1,0 +1,55 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "savebasket"
+  title: "SaveBasket"
+  version: "1.0.0"
+  contact:
+    name: "Sathyanarayanan"
+    email: "slakshmanan@coach.com"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        title: "invoke"
+        timeout: 60
+        verb: "POST"
+        cache-response: "protocol"
+        cache-ttl: 900
+        stop-on-error: []
+        version: "1.0.0"
+        target-url: "http://cap-sg-prd-1.securegateway.appdomain.cloud:18593/SaveBasket"
+    catch: []
+  phase: "realized"
+paths:
+  /SaveBasket:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+      parameters:
+      - name: "Payload"
+        required: true
+        in: "body"
+        schema:
+          type: "object"
+tags: []
+consumes:
+- "application/json"
+produces:
+- "application/json"

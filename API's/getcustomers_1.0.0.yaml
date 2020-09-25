@@ -1,0 +1,54 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "getcustomers"
+  title: "getCustomers"
+  version: "1.0.0"
+  description: "The API retrieves customer details, when provided with the details:\
+    \ Last name & Zip"
+schemes:
+- "https"
+host: "$(catalog.host)"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+securityDefinitions:
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "http://cap-sg-prd-3.integration.ibmcloud.com:17951/GetCustomersDetails?lastname=$(request.parameters.lastname)&zip=$(request.parameters.zip)"
+        timeout: 120
+        cache-response: "no-cache"
+        secure-gateway: false
+  phase: "realized"
+paths:
+  /getCustomers:
+    get:
+      responses:
+        200:
+          description: "200 OK"
+    parameters:
+    - name: "lastname"
+      type: "string"
+      required: true
+      in: "query"
+      description: "Last Name"
+    - name: "zip"
+      type: "string"
+      required: true
+      in: "query"
+      description: "Zip"
+definitions: {}
+basePath: "/"
