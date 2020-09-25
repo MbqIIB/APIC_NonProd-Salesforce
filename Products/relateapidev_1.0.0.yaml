@@ -1,0 +1,25 @@
+---
+product: "1.0.0"
+info:
+  name: "relateapidev"
+  title: "RelateAPI_DEV"
+  version: "1.0.0"
+visibility:
+  view:
+    enabled: true
+    type: "public"
+    tags: []
+    orgs: []
+  subscribe:
+    enabled: true
+    type: "authenticated"
+    tags: []
+    orgs: []
+plans:
+  default:
+    title: "Default Plan"
+    description: "Default Plan"
+    approval: false
+    rate-limit:
+      hard-limit: false
+      value: "100/hour"

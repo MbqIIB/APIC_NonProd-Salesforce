@@ -1,0 +1,31 @@
+---
+product: "1.0.0"
+info:
+  name: "omsvertex"
+  title: "OMS_VERTEX"
+  version: "1.0.0"
+  contact:
+    name: "Sujai Priyan"
+    email: "sjaganathan@coach.com"
+visibility:
+  view:
+    enabled: true
+    type: "public"
+    tags: []
+    orgs: []
+  subscribe:
+    enabled: true
+    type: "authenticated"
+    tags: []
+    orgs: []
+apis:
+  omsvertex:
+    $ref: "omsvertex_1.0.0.yaml"
+plans:
+  default:
+    title: "Default Plan"
+    description: "Default Plan"
+    approval: false
+    rate-limit:
+      hard-limit: false
+      value: "100/hour"

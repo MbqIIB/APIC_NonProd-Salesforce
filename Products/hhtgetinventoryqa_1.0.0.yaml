@@ -1,0 +1,28 @@
+---
+product: "1.0.0"
+info:
+  name: "hhtgetinventoryqa"
+  title: "HHT_GetInventory_QA"
+  version: "1.0.0"
+visibility:
+  view:
+    enabled: true
+    type: "public"
+    tags: []
+    orgs: []
+  subscribe:
+    enabled: true
+    type: "authenticated"
+    tags: []
+    orgs: []
+apis:
+  hhtgetinventory:
+    $ref: "hhtgetinventory_1.0.0.yaml"
+plans:
+  default:
+    title: "Default Plan"
+    description: "Default Plan"
+    approval: false
+    rate-limit:
+      hard-limit: false
+      value: "100/hour"
