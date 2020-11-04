@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "490ae1cb-70b1-44bf-ba15-24a408b84cfe",
+		"name": "OMS_VERTEX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vertex_SB",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "e85185a6-9851-42b4-a94f-a979f3fdaebf",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<Order DocumentType=\"0001\" EnterpriseCode=\"SW_CA\"\r\n    EntryType=\"RETAIL_ECOMM\" OrderDate=\"2020-06-26T13:01:30+00:00\"\r\n    OrderHeaderKey=\"20200626131519838957662\" OrderNo=\"SCD00002083\">\r\n        <PersonInfoShipTo AddressLine1=\"3 Auburn Ave\" AddressLine2=\"\"\r\n        AddressLine3=\"\" AddressLine4=\"\" AddressLine5=\"\" AddressLine6=\"\"\r\n        AlternateEmailID=\"\" Beeper=\"\" City=\"Toronto\" Company=\"\"\r\n        Country=\"CA\" DayFaxNo=\"\"  Department=\"\"\r\n         EveningFaxNo=\"\" EveningPhone=\"\"\r\n        FirstName=\"rstd\" JobTitle=\"\" LastName=\"test\" MiddleName=\"\"\r\n        MobilePhone=\"\" OtherPhone=\"\" PersonID=\"\"\r\n        PersonInfoKey=\"20200603130727503687768\" State=\"ON\" Suffix=\"\"\r\n        Title=\"\" ZipCode=\"M6H 2L6\"/>\r\n    <PersonInfoBillTo AddressLine1=\"3 Auburn Ave\" AddressLine2=\"\"\r\n        AddressLine3=\"\" AddressLine4=\"\" AddressLine5=\"\" AddressLine6=\"\"\r\n       AlternateEmailID=\"\" Beeper=\"\" City=\"Toronto\" Company=\"\"\r\n        Country=\"CA\" DayFaxNo=\"\" DayPhone=\"\" Department=\"\"\r\n        EveningFaxNo=\"\" EveningPhone=\"\"\r\n        FirstName=\"tsta\" JobTitle=\"\" LastName=\"tsts\" MiddleName=\"\"\r\n        MobilePhone=\"\" OtherPhone=\"\" PersonID=\"\"\r\n        PersonInfoKey=\"20200603130727503687768\" State=\"ON\" Suffix=\"\"\r\n        Title=\"\" ZipCode=\"M6H 2L6\"/>\r\n    <OverallTotals GrandCharges=\"20.99\" GrandDiscount=\"280.00\"\r\n        GrandTax=\"327.73\" GrandTotal=\"2843.72\" HdrCharges=\"20.99\"\r\n        HdrDiscount=\"2.50\" HdrTax=\"3.05\" HdrTotal=\"21.54\" LineSubTotal=\"1665.00\"/>\r\n    <HeaderCharges>\r\n        <HeaderCharge ChargeAmount=\"20.99\" ChargeCategory=\"SHIPPING\"\r\n            ChargeName=\"Shipping\" ChargeNameKey=\"202005221150288593203\"\r\n           InvoicedChargeAmount=\"0.00\" IsBillable=\"Y\" IsDiscount=\"N\"\r\n            IsManual=\"Y\" IsShippingCharge=\"Y\" Reference=\"\" RemainingChargeAmount=\"20.99\">\r\n            <Extn ExtnChargePerLine=\"0.00\" ExtnChargePerUnit=\"0.00\"/>\r\n        </HeaderCharge>\r\n        <HeaderCharge ChargeAmount=\"2.50\"\r\n            ChargeCategory=\"SHIPPING_DISCOUNT\"\r\n           ChargeName=\"ShippingDiscount\"\r\n            ChargeNameKey=\"202005221151578593243\"\r\n            InvoicedChargeAmount=\"0.00\" IsBillable=\"Y\" IsDiscount=\"Y\"\r\n            IsManual=\"Y\" IsShippingCharge=\"N\" Reference=\"\" RemainingChargeAmount=\"2.50\">\r\n            <Extn ExtnChargePerLine=\"0.00\" ExtnChargePerUnit=\"0.00\"/>\r\n        </HeaderCharge>\r\n    </HeaderCharges>\r\n    <HeaderTaxes>\r\n        <HeaderTax ChargeCategory=\"SHIPPING\" ChargeName=\"SHIPPING_TAX\"\r\n           ChargeNameKey=\"\" InvoicedTax=\"0.00\" Reference_1=\"3.05\"\r\n            Reference_2=\"0.13\" Reference_3=\"\" RemainingTax=\"3.05\"\r\n            Tax=\"3.05\" TaxName=\"GST/HST\" TaxPercentage=\"0.13\" TaxableFlag=\"N\"/>\r\n        <TaxSummary>\r\n            <TaxSummaryDetail InvoicedTax=\"0.00\" OverallTax=\"3.05\"\r\n               RemainingTax=\"3.05\" TaxName=\"GST/HST\"/>\r\n        </TaxSummary>\r\n    </HeaderTaxes>\r\n    <OrderLines>\r\n        <OrderLine DeliveryMethod=\"SHP\"\r\n            OrderLineKey=\"20200626131519838957665\" OrderedQty=\"3.00\"\r\n           PrimeLineNo=\"1\" SubLineNo=\"1\">\r\n            <Item CostCurrency=\"\" CountryOfOrigin=\"\"\r\n                CustomerItem=\"S8466 BLK  6.5 B\"\r\n               CustomerItemDesc=\"COMET;BLK;6.5 B\" ECCNNo=\"\"\r\n                HarmonizedCode=\"\" ISBN=\"\" ItemDesc=\"COMET\"\r\n               ItemID=\"S8466 BLK  6.5 B\" ItemShortDesc=\"COMET\"\r\n               ItemWeight=\"0.50\" ItemWeightUOM=\"LBS\"\r\n                ManufacturerItem=\"PUM\" ManufacturerItemDesc=\"Pump\"\r\n                ManufacturerName=\"\" NMFCClass=\"\" NMFCCode=\"\"\r\n                NMFCDescription=\"\" ProductClass=\"\"\r\n                ProductLine=\"C3C31S01C31S01PMPC31S01PMPPMP\"\r\n                ScheduleBCode=\"\" SupplierItem=\"\" SupplierItemDesc=\"\"\r\n                TaxProductCode=\"100\" UPCCode=\"647245334936\"\r\n                UnitCost=\"0.00\" UnitOfMeasure=\"EACH\"/>\r\n            <LinePriceInfo AdditionalLinePriceTotal=\"0.00\"\r\n              LineTotal=\"2822.18\" TaxableFlag=\"Y\" UnitPrice=\"555.00\"/>\r\n            <LineCharges>\r\n                <LineCharge AmountFromAddnlLinePrices=\"0.00\"\r\n                    ChargeAmount=\"277.50\" ChargeCategory=\"DISCOUNT\"\r\n                    ChargeName=\"ITEMP1\" ChargeNameKey=\"\"\r\n                    ChargePerLine=\"0.00\" ChargePerUnit=\"55.50\"\r\n                    InvoicedChargeAmount=\"0.00\"\r\n                    InvoicedChargePerLine=\"0.00\"\r\n                    InvoicedChargePerUnit=\"0.00\" IsBillable=\"Y\"\r\n                   IsDiscount=\"Y\" IsManual=\"Y\" IsShippingCharge=\"N\"\r\n                    Reference=\"\" RemainingChargeAmount=\"277.50\"\r\n                    RemainingChargePerLine=\"0.00\" RemainingChargePerUnit=\"55.50\"/>\r\n            </LineCharges>\r\n            <LineTaxes>\r\n                <LineTax ChargeCategory=\"Price\" ChargeName=\"GST/HST\"\r\n                    ChargeNameKey=\"\" InvoicedTax=\"0.00\"\r\n                   Reference_1=\"324.68\" Reference_2=\"0.13\"\r\n                    Reference_3=\"\" RemainingTax=\"324.68\" Tax=\"324.68\"\r\n                    TaxName=\"GST/HST\" TaxPercentage=\"0.13\" TaxableFlag=\"N\"/>\r\n            </LineTaxes>\r\n            <LineOverallTotals LineTotalWithoutTax=\"1498.50\"/>\r\n        </OrderLine>\r\n    </OrderLines>\r\n</Order>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/sb/omsvertex/Taxcalculate",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"sb",
+						"omsvertex",
+						"Taxcalculate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vertex_QA",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "0354b2ff-92c0-4c93-b5a7-2a6f0f82a91b",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<Order DocumentType=\"0001\" EnterpriseCode=\"SW_CA\"\r\n    EntryType=\"RETAIL_ECOMM\" OrderDate=\"2020-06-26T13:01:30+00:00\"\r\n    OrderHeaderKey=\"20200626131519838957662\" OrderNo=\"SCD00002083\">\r\n        <PersonInfoShipTo AddressLine1=\"3 Auburn Ave\" AddressLine2=\"\"\r\n        AddressLine3=\"\" AddressLine4=\"\" AddressLine5=\"\" AddressLine6=\"\"\r\n        AlternateEmailID=\"\" Beeper=\"\" City=\"Toronto\" Company=\"\"\r\n        Country=\"CA\" DayFaxNo=\"\"  Department=\"\"\r\n         EveningFaxNo=\"\" EveningPhone=\"\"\r\n        FirstName=\"rstd\" JobTitle=\"\" LastName=\"test\" MiddleName=\"\"\r\n        MobilePhone=\"\" OtherPhone=\"\" PersonID=\"\"\r\n        PersonInfoKey=\"20200603130727503687768\" State=\"ON\" Suffix=\"\"\r\n        Title=\"\" ZipCode=\"M6H 2L6\"/>\r\n    <PersonInfoBillTo AddressLine1=\"3 Auburn Ave\" AddressLine2=\"\"\r\n        AddressLine3=\"\" AddressLine4=\"\" AddressLine5=\"\" AddressLine6=\"\"\r\n       AlternateEmailID=\"\" Beeper=\"\" City=\"Toronto\" Company=\"\"\r\n        Country=\"CA\" DayFaxNo=\"\" DayPhone=\"\" Department=\"\"\r\n        EveningFaxNo=\"\" EveningPhone=\"\"\r\n        FirstName=\"tsta\" JobTitle=\"\" LastName=\"tsts\" MiddleName=\"\"\r\n        MobilePhone=\"\" OtherPhone=\"\" PersonID=\"\"\r\n        PersonInfoKey=\"20200603130727503687768\" State=\"ON\" Suffix=\"\"\r\n        Title=\"\" ZipCode=\"M6H 2L6\"/>\r\n    <OverallTotals GrandCharges=\"20.99\" GrandDiscount=\"280.00\"\r\n        GrandTax=\"327.73\" GrandTotal=\"2843.72\" HdrCharges=\"20.99\"\r\n        HdrDiscount=\"2.50\" HdrTax=\"3.05\" HdrTotal=\"21.54\" LineSubTotal=\"1665.00\"/>\r\n    <HeaderCharges>\r\n        <HeaderCharge ChargeAmount=\"20.99\" ChargeCategory=\"SHIPPING\"\r\n            ChargeName=\"Shipping\" ChargeNameKey=\"202005221150288593203\"\r\n           InvoicedChargeAmount=\"0.00\" IsBillable=\"Y\" IsDiscount=\"N\"\r\n            IsManual=\"Y\" IsShippingCharge=\"Y\" Reference=\"\" RemainingChargeAmount=\"20.99\">\r\n            <Extn ExtnChargePerLine=\"0.00\" ExtnChargePerUnit=\"0.00\"/>\r\n        </HeaderCharge>\r\n        <HeaderCharge ChargeAmount=\"2.50\"\r\n            ChargeCategory=\"SHIPPING_DISCOUNT\"\r\n           ChargeName=\"ShippingDiscount\"\r\n            ChargeNameKey=\"202005221151578593243\"\r\n            InvoicedChargeAmount=\"0.00\" IsBillable=\"Y\" IsDiscount=\"Y\"\r\n            IsManual=\"Y\" IsShippingCharge=\"N\" Reference=\"\" RemainingChargeAmount=\"2.50\">\r\n            <Extn ExtnChargePerLine=\"0.00\" ExtnChargePerUnit=\"0.00\"/>\r\n        </HeaderCharge>\r\n    </HeaderCharges>\r\n    <HeaderTaxes>\r\n        <HeaderTax ChargeCategory=\"SHIPPING\" ChargeName=\"SHIPPING_TAX\"\r\n           ChargeNameKey=\"\" InvoicedTax=\"0.00\" Reference_1=\"3.05\"\r\n            Reference_2=\"0.13\" Reference_3=\"\" RemainingTax=\"3.05\"\r\n            Tax=\"3.05\" TaxName=\"GST/HST\" TaxPercentage=\"0.13\" TaxableFlag=\"N\"/>\r\n        <TaxSummary>\r\n            <TaxSummaryDetail InvoicedTax=\"0.00\" OverallTax=\"3.05\"\r\n               RemainingTax=\"3.05\" TaxName=\"GST/HST\"/>\r\n        </TaxSummary>\r\n    </HeaderTaxes>\r\n    <OrderLines>\r\n        <OrderLine DeliveryMethod=\"SHP\"\r\n            OrderLineKey=\"20200626131519838957665\" OrderedQty=\"3.00\"\r\n           PrimeLineNo=\"1\" SubLineNo=\"1\">\r\n            <Item CostCurrency=\"\" CountryOfOrigin=\"\"\r\n                CustomerItem=\"S8466 BLK  6.5 B\"\r\n               CustomerItemDesc=\"COMET;BLK;6.5 B\" ECCNNo=\"\"\r\n                HarmonizedCode=\"\" ISBN=\"\" ItemDesc=\"COMET\"\r\n               ItemID=\"S8466 BLK  6.5 B\" ItemShortDesc=\"COMET\"\r\n               ItemWeight=\"0.50\" ItemWeightUOM=\"LBS\"\r\n                ManufacturerItem=\"PUM\" ManufacturerItemDesc=\"Pump\"\r\n                ManufacturerName=\"\" NMFCClass=\"\" NMFCCode=\"\"\r\n                NMFCDescription=\"\" ProductClass=\"\"\r\n                ProductLine=\"C3C31S01C31S01PMPC31S01PMPPMP\"\r\n                ScheduleBCode=\"\" SupplierItem=\"\" SupplierItemDesc=\"\"\r\n                TaxProductCode=\"100\" UPCCode=\"647245334936\"\r\n                UnitCost=\"0.00\" UnitOfMeasure=\"EACH\"/>\r\n            <LinePriceInfo AdditionalLinePriceTotal=\"0.00\"\r\n              LineTotal=\"2822.18\" TaxableFlag=\"Y\" UnitPrice=\"555.00\"/>\r\n            <LineCharges>\r\n                <LineCharge AmountFromAddnlLinePrices=\"0.00\"\r\n                    ChargeAmount=\"277.50\" ChargeCategory=\"DISCOUNT\"\r\n                    ChargeName=\"ITEMP1\" ChargeNameKey=\"\"\r\n                    ChargePerLine=\"0.00\" ChargePerUnit=\"55.50\"\r\n                    InvoicedChargeAmount=\"0.00\"\r\n                    InvoicedChargePerLine=\"0.00\"\r\n                    InvoicedChargePerUnit=\"0.00\" IsBillable=\"Y\"\r\n                   IsDiscount=\"Y\" IsManual=\"Y\" IsShippingCharge=\"N\"\r\n                    Reference=\"\" RemainingChargeAmount=\"277.50\"\r\n                    RemainingChargePerLine=\"0.00\" RemainingChargePerUnit=\"55.50\"/>\r\n            </LineCharges>\r\n            <LineTaxes>\r\n                <LineTax ChargeCategory=\"Price\" ChargeName=\"GST/HST\"\r\n                    ChargeNameKey=\"\" InvoicedTax=\"0.00\"\r\n                   Reference_1=\"324.68\" Reference_2=\"0.13\"\r\n                    Reference_3=\"\" RemainingTax=\"324.68\" Tax=\"324.68\"\r\n                    TaxName=\"GST/HST\" TaxPercentage=\"0.13\" TaxableFlag=\"N\"/>\r\n            </LineTaxes>\r\n            <LineOverallTotals LineTotalWithoutTax=\"1498.50\"/>\r\n        </OrderLine>\r\n    </OrderLines>\r\n</Order>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/qa/omsvertex/Taxcalculate",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"qa",
+						"omsvertex",
+						"Taxcalculate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vertex_QA2",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "6e19b1f2-f8ec-401a-a375-f9fb976e3de7",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<Order DocumentType=\"0001\" EnterpriseCode=\"SW_CA\"\r\n    EntryType=\"RETAIL_ECOMM\" OrderDate=\"2020-06-26T13:01:30+00:00\"\r\n    OrderHeaderKey=\"20200626131519838957662\" OrderNo=\"SCD00002083\">\r\n        <PersonInfoShipTo AddressLine1=\"3 Auburn Ave\" AddressLine2=\"\"\r\n        AddressLine3=\"\" AddressLine4=\"\" AddressLine5=\"\" AddressLine6=\"\"\r\n        AlternateEmailID=\"\" Beeper=\"\" City=\"Toronto\" Company=\"\"\r\n        Country=\"CA\" DayFaxNo=\"\"  Department=\"\"\r\n         EveningFaxNo=\"\" EveningPhone=\"\"\r\n        FirstName=\"rstd\" JobTitle=\"\" LastName=\"test\" MiddleName=\"\"\r\n        MobilePhone=\"\" OtherPhone=\"\" PersonID=\"\"\r\n        PersonInfoKey=\"20200603130727503687768\" State=\"ON\" Suffix=\"\"\r\n        Title=\"\" ZipCode=\"M6H 2L6\"/>\r\n    <PersonInfoBillTo AddressLine1=\"3 Auburn Ave\" AddressLine2=\"\"\r\n        AddressLine3=\"\" AddressLine4=\"\" AddressLine5=\"\" AddressLine6=\"\"\r\n       AlternateEmailID=\"\" Beeper=\"\" City=\"Toronto\" Company=\"\"\r\n        Country=\"CA\" DayFaxNo=\"\" DayPhone=\"\" Department=\"\"\r\n        EveningFaxNo=\"\" EveningPhone=\"\"\r\n        FirstName=\"tsta\" JobTitle=\"\" LastName=\"tsts\" MiddleName=\"\"\r\n        MobilePhone=\"\" OtherPhone=\"\" PersonID=\"\"\r\n        PersonInfoKey=\"20200603130727503687768\" State=\"ON\" Suffix=\"\"\r\n        Title=\"\" ZipCode=\"M6H 2L6\"/>\r\n    <OverallTotals GrandCharges=\"20.99\" GrandDiscount=\"280.00\"\r\n        GrandTax=\"327.73\" GrandTotal=\"2843.72\" HdrCharges=\"20.99\"\r\n        HdrDiscount=\"2.50\" HdrTax=\"3.05\" HdrTotal=\"21.54\" LineSubTotal=\"1665.00\"/>\r\n    <HeaderCharges>\r\n        <HeaderCharge ChargeAmount=\"20.99\" ChargeCategory=\"SHIPPING\"\r\n            ChargeName=\"Shipping\" ChargeNameKey=\"202005221150288593203\"\r\n           InvoicedChargeAmount=\"0.00\" IsBillable=\"Y\" IsDiscount=\"N\"\r\n            IsManual=\"Y\" IsShippingCharge=\"Y\" Reference=\"\" RemainingChargeAmount=\"20.99\">\r\n            <Extn ExtnChargePerLine=\"0.00\" ExtnChargePerUnit=\"0.00\"/>\r\n        </HeaderCharge>\r\n        <HeaderCharge ChargeAmount=\"2.50\"\r\n            ChargeCategory=\"SHIPPING_DISCOUNT\"\r\n           ChargeName=\"ShippingDiscount\"\r\n            ChargeNameKey=\"202005221151578593243\"\r\n            InvoicedChargeAmount=\"0.00\" IsBillable=\"Y\" IsDiscount=\"Y\"\r\n            IsManual=\"Y\" IsShippingCharge=\"N\" Reference=\"\" RemainingChargeAmount=\"2.50\">\r\n            <Extn ExtnChargePerLine=\"0.00\" ExtnChargePerUnit=\"0.00\"/>\r\n        </HeaderCharge>\r\n    </HeaderCharges>\r\n    <HeaderTaxes>\r\n        <HeaderTax ChargeCategory=\"SHIPPING\" ChargeName=\"SHIPPING_TAX\"\r\n           ChargeNameKey=\"\" InvoicedTax=\"0.00\" Reference_1=\"3.05\"\r\n            Reference_2=\"0.13\" Reference_3=\"\" RemainingTax=\"3.05\"\r\n            Tax=\"3.05\" TaxName=\"GST/HST\" TaxPercentage=\"0.13\" TaxableFlag=\"N\"/>\r\n        <TaxSummary>\r\n            <TaxSummaryDetail InvoicedTax=\"0.00\" OverallTax=\"3.05\"\r\n               RemainingTax=\"3.05\" TaxName=\"GST/HST\"/>\r\n        </TaxSummary>\r\n    </HeaderTaxes>\r\n    <OrderLines>\r\n        <OrderLine DeliveryMethod=\"SHP\"\r\n            OrderLineKey=\"20200626131519838957665\" OrderedQty=\"3.00\"\r\n           PrimeLineNo=\"1\" SubLineNo=\"1\">\r\n            <Item CostCurrency=\"\" CountryOfOrigin=\"\"\r\n                CustomerItem=\"S8466 BLK  6.5 B\"\r\n               CustomerItemDesc=\"COMET;BLK;6.5 B\" ECCNNo=\"\"\r\n                HarmonizedCode=\"\" ISBN=\"\" ItemDesc=\"COMET\"\r\n               ItemID=\"S8466 BLK  6.5 B\" ItemShortDesc=\"COMET\"\r\n               ItemWeight=\"0.50\" ItemWeightUOM=\"LBS\"\r\n                ManufacturerItem=\"PUM\" ManufacturerItemDesc=\"Pump\"\r\n                ManufacturerName=\"\" NMFCClass=\"\" NMFCCode=\"\"\r\n                NMFCDescription=\"\" ProductClass=\"\"\r\n                ProductLine=\"C3C31S01C31S01PMPC31S01PMPPMP\"\r\n                ScheduleBCode=\"\" SupplierItem=\"\" SupplierItemDesc=\"\"\r\n                TaxProductCode=\"100\" UPCCode=\"647245334936\"\r\n                UnitCost=\"0.00\" UnitOfMeasure=\"EACH\"/>\r\n            <LinePriceInfo AdditionalLinePriceTotal=\"0.00\"\r\n              LineTotal=\"2822.18\" TaxableFlag=\"Y\" UnitPrice=\"555.00\"/>\r\n            <LineCharges>\r\n                <LineCharge AmountFromAddnlLinePrices=\"0.00\"\r\n                    ChargeAmount=\"277.50\" ChargeCategory=\"DISCOUNT\"\r\n                    ChargeName=\"ITEMP1\" ChargeNameKey=\"\"\r\n                    ChargePerLine=\"0.00\" ChargePerUnit=\"55.50\"\r\n                    InvoicedChargeAmount=\"0.00\"\r\n                    InvoicedChargePerLine=\"0.00\"\r\n                    InvoicedChargePerUnit=\"0.00\" IsBillable=\"Y\"\r\n                   IsDiscount=\"Y\" IsManual=\"Y\" IsShippingCharge=\"N\"\r\n                    Reference=\"\" RemainingChargeAmount=\"277.50\"\r\n                    RemainingChargePerLine=\"0.00\" RemainingChargePerUnit=\"55.50\"/>\r\n            </LineCharges>\r\n            <LineTaxes>\r\n                <LineTax ChargeCategory=\"Price\" ChargeName=\"GST/HST\"\r\n                    ChargeNameKey=\"\" InvoicedTax=\"0.00\"\r\n                   Reference_1=\"324.68\" Reference_2=\"0.13\"\r\n                    Reference_3=\"\" RemainingTax=\"324.68\" Tax=\"324.68\"\r\n                    TaxName=\"GST/HST\" TaxPercentage=\"0.13\" TaxableFlag=\"N\"/>\r\n            </LineTaxes>\r\n            <LineOverallTotals LineTotalWithoutTax=\"1498.50\"/>\r\n        </OrderLine>\r\n    </OrderLines>\r\n</Order>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/qa2/omsvertex/Taxcalculate",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"qa2",
+						"omsvertex",
+						"Taxcalculate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

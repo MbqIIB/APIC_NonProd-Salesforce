@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "dbfeee19-b361-42d8-afad-779f35142a3b",
+		"name": "GetEmailDetails",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Getemaildetails _SB",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "e85185a6-9851-42b4-a94f-a979f3fdaebf",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"GetEmailRequest\": \r\n [\r\n    {\r\n      \"Brand\": \"COACH\",\r\n      \"EmailAddress\": \"ashanmugam@coach.com\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/sb/Customer/GetEmailDetails",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"sb",
+						"Customer",
+						"GetEmailDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getemaildetails _PROD",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "4937e24d-cbc1-40ad-ba9a-ce71f8d6908e",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"GetEmailRequest\": \r\n [\r\n    {\r\n      \"Brand\": \"COACH\",\r\n      \"EmailAddress\": \"ashanmugam@coach.com\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry.apiconnect.ibmcloud.com/coachinc-api/prod/Customer/GetEmailDetails",
+					"protocol": "https",
+					"host": [
+						"api-tapestry",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"prod",
+						"Customer",
+						"GetEmailDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getemaildetails _QA",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "0354b2ff-92c0-4c93-b5a7-2a6f0f82a91b",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"GetEmailRequest\": \r\n [\r\n    {\r\n      \"Brand\": \"COACH\",\r\n      \"EmailAddress\": \"ashanmugam@coach.com\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/qa/Customer/GetEmailDetails",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"qa",
+						"Customer",
+						"GetEmailDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getemaildetails _QA2",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "6e19b1f2-f8ec-401a-a375-f9fb976e3de7",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"GetEmailRequest\": \r\n [\r\n    {\r\n      \"Brand\": \"COACH\",\r\n      \"EmailAddress\": \"ashanmugam@coach.com\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/qa2/Customer/GetEmailDetails",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"qa2",
+						"Customer",
+						"GetEmailDetails"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
