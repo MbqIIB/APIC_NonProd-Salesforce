@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "a2d52823-438a-49c1-a541-1d80942f1956",
+		"name": "Basket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SaveBasket_SB",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "c45851dc-3073-4b95-a6ef-8a0a36ccbbb2",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"BasketID\": \"010111405\",\r\n     \"Customer Name\": \"Lisa Cohen\",\r\n     \"Customer Id\": \"1234567888\",\r\n     \"Time Stamp\": \"2018-09-12T20:09:02.034Z\",\r\n     \"Ship\": \"No\",\r\n     \"Gift\": \"No\",\r\n     \"Associate ID\": \"104891\",\r\n     \"Country\": \"United States\",\r\n     \"Zip Code\": \"63141\",\r\n     \"Email\": \"Pink3536@gmail.com\",\r\n     \"Phone Number\": \"(+1) 3144530709\",\r\n     \"Address\": \"13362 Pointe Conway Dr. 63141\",\r\n     \"UPCCollection\": [{\r\n                   \"UPC\": \"889532922413\",\r\n                   \"Qty\": 1\r\n            }\r\n     ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/sb/SaveBasket",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"sb",
+						"SaveBasket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveBasket_QA",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "0354b2ff-92c0-4c93-b5a7-2a6f0f82a91b",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"BasketID\": \"010111405\",\r\n     \"Customer Name\": \"Lisa Cohen\",\r\n     \"Customer Id\": \"1234567888\",\r\n     \"Time Stamp\": \"2018-09-12T20:09:02.034Z\",\r\n     \"Ship\": \"No\",\r\n     \"Gift\": \"No\",\r\n     \"Associate ID\": \"104891\",\r\n     \"Country\": \"United States\",\r\n     \"Zip Code\": \"63141\",\r\n     \"Email\": \"Pink3536@gmail.com\",\r\n     \"Phone Number\": \"(+1) 3144530709\",\r\n     \"Address\": \"13362 Pointe Conway Dr. 63141\",\r\n     \"UPCCollection\": [{\r\n                   \"UPC\": \"889532922413\",\r\n                   \"Qty\": 1\r\n            }\r\n     ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/qa/SaveBasket",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"qa",
+						"SaveBasket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveBasket_QA2",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "6e19b1f2-f8ec-401a-a375-f9fb976e3de7",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-IBM-Client-Id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"BasketID\": \"010111405\",\r\n     \"Customer Name\": \"Lisa Cohen\",\r\n     \"Customer Id\": \"1234567888\",\r\n     \"Time Stamp\": \"2018-09-12T20:09:02.034Z\",\r\n     \"Ship\": \"No\",\r\n     \"Gift\": \"No\",\r\n     \"Associate ID\": \"104891\",\r\n     \"Country\": \"United States\",\r\n     \"Zip Code\": \"63141\",\r\n     \"Email\": \"Pink3536@gmail.com\",\r\n     \"Phone Number\": \"(+1) 3144530709\",\r\n     \"Address\": \"13362 Pointe Conway Dr. 63141\",\r\n     \"UPCCollection\": [{\r\n                   \"UPC\": \"889532922413\",\r\n                   \"Qty\": 1\r\n            }\r\n     ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tapestry-qa.apiconnect.ibmcloud.com/coachinc-api/qa2/SaveBasket",
+					"protocol": "https",
+					"host": [
+						"api-tapestry-qa",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"coachinc-api",
+						"qa2",
+						"SaveBasket"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
